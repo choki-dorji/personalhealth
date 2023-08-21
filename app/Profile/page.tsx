@@ -1,0 +1,154 @@
+"use client";
+import React, { useRef, useState } from "react";
+import styles from "./profile.module.css";
+import { useSession } from "next-auth/react";
+import { LoginUserProfile } from "@/utils/util";
+import {
+  useGetFireDataQuery,
+  useEditFireMutation,
+  useGetFireDataidQuery,
+} from "@/store/firebase";
+import { Button, Input } from "@nextui-org/react";
+import Image from "next/image";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+} from "@nextui-org/react";
+import { ref, uploadBytes } from "firebase/storage";
+import { storage } from "@/Firebase/setup";
+import { Imagetype } from "@/types";
+
+const link =
+  "https://firebasestorage.googleapis.com/v0/b/projectauthbackend.appspot.com/o/images";
+
+const Profile = () => {
+  const name = useRef("");
+  const [image, setImage] = useState<
+    Imagetype | Uint8Array | Blob | ArrayBuffer
+  >();
+  const address = useRef("");
+  const dob = useRef("");
+  const { data: session, status } = useSession();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { data: profile, isLoading, error } = useGetFireDataQuery();
+  const iduser = LoginUserProfile(profile, session?.user?.email);
+  const [edit, { isLoading: isEditing, isSuccess, isError }] =
+    useEditFireMutation();
+
+  const {
+    data: data1,
+    isLoading: load,
+    error: errorr,
+  } = useGetFireDataidQuery(iduser && iduser);
+
+  if (isLoading || load) {
+    return <p>Loading</p>;
+  }
+  // console.log(profile);
+
+  const handleImageChange = (e: any) => {
+    const file = e.target.files[0];
+    setImage(file);
+  };
+  // console.log(image);
+
+  const edithandler = (onClose: void) => {
+    const imageref = ref(storage, `images/${image?.name}`);
+    console.log(image);
+
+    uploadBytes(imageref, image)
+      .then(() => {
+        console.log("bj");
+      })
+      .catch((e) => console.log(e));
+
+    edit({
+      id: iduser,
+      data: {
+        name: name.current,
+        address: address.current,
+        image: image.name,
+      },
+    })
+      .then((r) => console.log("updated"))
+      .catch((err) => console.log(err));
+
+    onClose;
+  };
+
+  const imagelink = `${link}%2F${data1.image}?alt=media`;
+
+  console.log(data1);
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.profile}>
+        <div className={styles.profileImage}>
+          {data1.image !== "" ? (
+            <div className="flex justify-center">
+              <Image src={imagelink} alt="ajcnk" height={100} width={100} />
+            </div>
+          ) : (
+            <div className="flex justify-center">
+              <Image src="/image.png" alt="ajcnk" height={100} width={100} />
+            </div>
+          )}
+        </div>
+        <div className={styles.profileDetails}>
+          <h2 className={styles.name}>{data1.name ? data1.name : ""}</h2>
+          <p className={styles.email}>{data1.email ? data1.email : ""}</p>
+          <p className={styles.address}>{data1.address ? data1.address : ""}</p>
+        </div>
+        <Button onPress={onOpen}>
+          {data1.name && data1.email && data1.address
+            ? "Edit Details"
+            : "Add Details"}
+        </Button>
+        <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+          <ModalContent>
+            {(onClose: void) => (
+              <>
+                <ModalHeader className="flex flex-col gap-1">
+                  Add User Details
+                </ModalHeader>
+                <ModalBody>
+                  <Input
+                    label="username"
+                    onChange={(e) => (name.current = e.target.value)}
+                  />
+                  <Input
+                    label="address"
+                    onChange={(e) => (address.current = e.target.value)}
+                  />
+                  <Input
+                    label="DOB"
+                    onChange={(e) => (dob.current = e.target.value)}
+                  />
+                  <p>Image</p>
+                  <Input type="file" onChange={handleImageChange} />
+                </ModalBody>
+                <ModalFooter>
+                  <Button color="danger" variant="light" onClick={onClose}>
+                    Close
+                  </Button>
+                  <Button color="primary" onClick={() => edithandler(onClose)}>
+                    {data1.name && data1.email && data1.address
+                      ? "Edit Details"
+                      : "Add Details"}
+                  </Button>
+                </ModalFooter>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
+        {/* </> */}
+      </div>
+    </div>
+  );
+};
+
+export default Profile;

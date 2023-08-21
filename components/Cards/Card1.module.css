@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    /* justify-content: space-between; */
+    /* align-items: center; */
+  }
+  
+  .text {
+    flex: 1;
+  }
+  
+  .image__container {
+    margin-left: 300px; /* Adjust this value to create spacing between text and image */
+  }
+  

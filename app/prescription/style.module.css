@@ -1,0 +1,8 @@
+.container3 {
+    margin-top: 20px;
+    /* background-color: red; */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Create three equal columns */
+    grid-gap: 1rem; /* Add gap between cards if desired */
+    width: 100%;
+  }
