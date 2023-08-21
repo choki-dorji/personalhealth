@@ -19,17 +19,15 @@ import { Loginuserdata } from "@/utils/util";
 import { useDispatch } from "react-redux";
 import { getItem } from "@/store/reducer";
 import { useSession } from "next-auth/react";
+import { useGetItemOnSessionChange } from "@/utils/islogin";
 
 function Home() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const dispatch = useDispatch();
-  const { data: session, status } = useSession({
-    required: true,
-  });
-  // console.log(session);
-  dispatch(getItem(session));
-  // console.log(session);
+
+  // user data//////////
+  useGetItemOnSessionChange();
   const user = useSelector((state: any) => state.user);
+  //end userdata
 
   const {
     data: data1,

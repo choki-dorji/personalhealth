@@ -8,6 +8,7 @@ import PressureBarGraph from "@/components/chart/ChartBp";
 import { useGetBlooddataQuery } from "@/store/bp";
 import Paginations from "@/components/Pagination/pagination";
 import { User, loginuser } from "@/types";
+import { useGetItemOnSessionChange } from "@/utils/islogin";
 
 interface items {
   _id: string;
@@ -18,6 +19,7 @@ interface items {
 }
 
 function BP() {
+  useGetItemOnSessionChange();
   const userloggedin = useSelector((state: User | loginuser) => state.user);
   const [currentPage, setCurrentPage] = useState(1);
   const { data: data1, isLoading, error } = useGetBpQuery();
@@ -97,7 +99,19 @@ function BP() {
 
   return (
     <div>
-      <Add label1="Highend" label2="lowend" />
+      <div className="flex justify-center">
+        <h1>Add Blood Pressure data</h1>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+        }}
+      >
+        <Add />
+      </div>
+
       <div className="flex justify-center">
         <div className="mt-4 w-[140vh] h-[50vh] m-2  flex-wrap border border-gray-300W">
           {/* <ScatterGraph data={data} /> */}

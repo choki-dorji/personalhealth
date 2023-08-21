@@ -4,53 +4,113 @@ import Input1 from "../Input";
 import { Button } from "@nextui-org/button";
 import { usePostBMIMutation } from "@/store/bp";
 import { useSession } from "next-auth/react";
+import { Form, Field } from "react-final-form";
+import styles from "./add.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
-interface Props {
-  label1: string;
-  label2: string;
+interface values {
+  height: number;
+  weight: number;
 }
 
-function AddWeight(props: Props) {
+function AddWeight() {
   const { data: session, status } = useSession({
     required: true,
   });
-  const [value, setValue] = useState<Number | null>(null);
-  const [value1, setValue1] = useState<Number | null>(null);
 
   const [postBMi] = usePostBMIMutation();
 
-  console.log(session?.user?.email);
+  const required = (value: values): string | undefined =>
+    value ? undefined : "It is required fields";
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
+  const submithandler = async (values: values) => {
     await postBMi({
-      Height: value,
-      weight: value1,
+      Height: values.height,
+      weight: values.weight,
       user: session?.user?.email,
     });
   };
 
   return (
     <>
-      <form className="flex justify-center" onSubmit={handleSubmit}>
-        <Input1
-          type="number"
-          label={props.label1}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          className="mr-2 h-[2rem]" // Margin and equal height
-        />
-        <Input1
-          type="number"
-          label={props.label2}
-          value={value1}
-          onChange={(e) => setValue1(e.target.value)}
-          className="mr-2 h-[2rem]" // Margin and equal height
-        />
-        <Button type="submit" className="mt-2 h-[3rem]">
-          Add
-        </Button>
-      </form>
+      <Form onSubmit={submithandler}>
+        {({ handleSubmit, values, submitting }) => (
+          <form onSubmit={handleSubmit}>
+            <Field
+              name="height"
+              component="input"
+              placeholder="Height"
+              validate={required}
+            >
+              {({ input, meta, placeholder }) => (
+                <div className={styles.div}>
+                  <label className={styles.label}>{placeholder}</label>
+                  <div className={styles.inputContainer}>
+                    <input
+                      {...input}
+                      type="number"
+                      placeholder={placeholder}
+                      className={
+                        meta.error && meta.touched
+                          ? styles.inputerror
+                          : styles.input
+                      }
+                    />
+                    {meta.touched && !meta.error && (
+                      <div className={styles.iconContainer}>
+                        <FontAwesomeIcon icon={faCheck} />
+                      </div>
+                    )}
+                  </div>
+                  {meta.error && meta.touched && (
+                    <span className={styles.span}>{meta.error}</span>
+                  )}
+                </div>
+              )}
+            </Field>
+            <Field
+              name="weight"
+              component="input"
+              placeholder="Weight"
+              validate={required}
+            >
+              {({ input, meta, placeholder }) => (
+                <div className={styles.div}>
+                  <label className={styles.label}>{placeholder}</label>
+                  <div className={styles.inputContainer}>
+                    <input
+                      {...input}
+                      type="number"
+                      placeholder={placeholder}
+                      className={
+                        meta.error && meta.touched
+                          ? styles.inputerror
+                          : styles.input
+                      }
+                    />
+                    {meta.touched && !meta.error && (
+                      <div className={styles.iconContainer}>
+                        <FontAwesomeIcon icon={faCheck} />
+                      </div>
+                    )}
+                  </div>
+                  {meta.error && meta.touched && (
+                    <span className={styles.span}>{meta.error}</span>
+                  )}
+                </div>
+              )}
+            </Field>
+            <Button
+              type="submit"
+              className="mt-2 h-[3rem]"
+              isDisabled={submitting}
+            >
+              {submitting ? "Adding" : "Add"}
+            </Button>
+          </form>
+        )}
+      </Form>
     </>
   );
 }

@@ -6,22 +6,42 @@ import {
   CardFooter,
   Divider,
   Tooltip,
+  Modal,
+  useDisclosure,
 } from "@nextui-org/react";
 import Select from "../Select/page";
 import { useSelector } from "react-redux";
 import { Alarm, Alarmdata } from "@/types";
 import { Alarms, format12Hour } from "@/utils/util";
 import A from "../sound/Notifi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import Delete from "../Modal/Dashbaord/Delete";
+import Edit from "../Modal/Dashbaord/Edit";
 
 export default function Card2(props: Alarmdata) {
-  const selectedtime = useSelector((state: any) => state.time);
-  // console.log(selectedtime);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const {
+    isOpen: isOpendelete,
+    onOpen: onOpenDelete,
+    onOpenChange: onDeleteOpenChange,
+  } = useDisclosure();
 
+  const selectedtime = useSelector((state: any) => state.time);
+  console.log(selectedtime);
+  console.log(props.user);
   const specificuser =
     props.alarm && props.alarm.filter((f) => f.user === props.user);
+  console.log(specificuser);
 
   const filteredAlarms = Alarms(specificuser, selectedtime);
+  console.log(filteredAlarms);
   // console.log(filteredAlarms);
+  console.log(props);
+  // const Delete = () => (
+
+  // );
+  // const Edit = () => {};
 
   return (
     <Card className="max-w-[360px]">
@@ -37,84 +57,69 @@ export default function Card2(props: Alarmdata) {
       </CardHeader>
       <Divider />
       <div className="h-[60vh] overflow-y-scroll">
-        {filteredAlarms && filteredAlarms.length > 0 ? (
-          filteredAlarms.map((alarm: Alarm) => (
-            <Tooltip
-              content={`you have alarm at ${selectedtime.user}`}
-              key={alarm.time}
+        {filteredAlarms?.map((alarm: Alarm) => (
+          // <Tooltip
+          //   content={`you have alarm at ${selectedtime.user}`}
+          //   key={alarm._id}
+          // >
+          <>
+            <CardBody
+              className="flex flex-row justify-between"
+              key={alarm._id}
+              style={{
+                backgroundColor: "#4D3C77",
+                margin: "12px",
+                borderRadius: "12px",
+              }}
             >
-              <CardBody
-                className="flex flex-row justify-between"
-                style={{
-                  backgroundColor: "#4D3C77",
-                  margin: "12px",
-                  borderRadius: "12px",
-                }}
-              >
-                <div className="flex flex-col">
-                  <p className="text-md">{alarm.medicine}</p>
-                </div>
-                <div className="flex items-center">
-                  <p className="text-small text-default-500">
-                    {format12Hour(alarm.time)}
-                  </p>
-                </div>
-              </CardBody>
-              <A alarm={alarm.time} name={alarm.medicine} />
-            </Tooltip>
-          ))
-        ) : specificuser &&
-          filteredAlarms?.length === 0 &&
-          specificuser.length > 0 ? (
-          specificuser.map((item: Alarm) => (
-            <CardBody key={item.time} className="flex flex-row justify-between">
               <div className="flex flex-col">
-                <p className="text-md">{item.medicine}</p>
+                <p className="text-md">{alarm.medicine}</p>
               </div>
-
               <div className="flex items-center">
-                {/* <Check /> */}
-                <p className="text-small text-default-500">
-                  {format12Hour(item.time)}
+                <p className="text-small mr-9 text-default-500">
+                  {format12Hour(alarm.time)}
                 </p>
+                <Tooltip content="Delete" color="danger">
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    onClick={onOpen}
+                    className="mr-2"
+                    style={{ cursor: "pointer" }}
+                  />
+                </Tooltip>
+                <Tooltip content="Edit" color="primary">
+                  <FontAwesomeIcon
+                    icon={faPenToSquare}
+                    onClick={Edit}
+                    style={{ cursor: "pointer" }}
+                  />
+                </Tooltip>
               </div>
-              <A alarm={item.time} name={item.medicine} />
+              {/* delete */}
             </CardBody>
-          ))
-        ) : filteredAlarms?.length === 0 ? (
-          <Tooltip content={`No alarm at ${selectedtime.user}`}>
-            <div
-              style={{
-                backgroundColor: "#4D3C77",
-                margin: "12px",
-                borderRadius: "12px",
-                padding: "30px",
-              }}
+            {/* <Modal
+              isOpen={isOpen}
+              onOpenChange={onOpenChange}
+              placement="top-center"
             >
-              <p className="text-lg text-default-700 flex justify-center">
-                No Alarms
-              </p>
-            </div>
-          </Tooltip>
-        ) : specificuser?.length === 0 ? (
-          <Tooltip content={`No alarm at ${selectedtime.user}`}>
-            <div
-              style={{
-                backgroundColor: "#4D3C77",
-                margin: "12px",
-                borderRadius: "12px",
-                padding: "30px",
-              }}
-            >
-              <p className="text-lg text-default-700 flex justify-center">
-                No Alarms
-              </p>
-            </div>
-          </Tooltip>
-        ) : (
-          ""
-        )}
+              <Delete onClose={onclose} onDelete={onclose} />
+            </Modal> */}
+          </>
+
+          // {/* <A alarm={alarm.time} name={alarm.medicine} /> */}
+          // </Tooltip>
+        ))}
       </div>
+      {/* delete */}
+
+      {/* edit */}
+      {/* <Modal
+        isOpen={isOpendelete}
+        onOpenChange={onDeleteOpenChange}
+        placement="top-center"
+      >
+        <Edit onClose={onclose} id={props.alarm?._id} onedit={onOpenChange} />
+      </Modal> */}
     </Card>
   );
 }

@@ -1,0 +1,65 @@
+/* Container styles */
+.div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+    width: 100vh;
+  }
+  
+  /* Label styles */
+  .label {
+    font-size: 14px;
+    color: #edeef2;
+    margin-bottom: 4px;
+  }
+  
+  /* Input container styles */
+  .inputContainer {
+    position: relative;
+  }
+  
+  /* Input styles */
+  .input {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    transition: border-color 0.2s;
+    outline: none;
+    width: 100%;
+  }
+  
+  .inputerror {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid red;
+    border-radius: 4px;
+    transition: border-color 0.2s;
+    outline: none;
+    width: 100%;
+  }
+
+  .input:focus {
+    border-color: #1a73e8;
+  }
+  
+  /* FontAwesome icon container styles */
+  .iconContainer {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+  }
+  
+  /* FontAwesome icon styles */
+  .icon {
+    color: #4caf50; /* Change the color as needed */
+  }
+  
+  /* Error message styles */
+  .span {
+    font-size: 12px;
+    color: #f44336;
+    margin-top: 4px;
+  }
+  

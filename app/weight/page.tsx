@@ -8,6 +8,8 @@ import { useGetBMIQuery } from "@/store/bp";
 import Paginations from "@/components/Pagination/pagination";
 import { useGetBMIDataQuery } from "@/store/bp";
 import BMIGraph from "@/components/chart/GraphBMI";
+import { useGetItemOnSessionChange } from "@/utils/islogin";
+
 interface BMIitem {
   _id: string;
   Height: number;
@@ -15,6 +17,7 @@ interface BMIitem {
 }
 
 function BMI() {
+  useGetItemOnSessionChange();
   const logginuser = useSelector((state: any) => state.user);
   const [currentPage, setCurrentPage] = useState(1);
   const { data: data1, isLoading, error } = useGetBMIQuery();
@@ -53,7 +56,18 @@ function BMI() {
 
   return (
     <div>
-      <AddWeight label1="Height" label2="weight" />
+      <div className="flex justify-center">
+        <h1>Add BMI data</h1>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+        }}
+      >
+        <AddWeight />
+      </div>
       <div className="flex justify-center">
         <div className="mt-4 w-[140vh] h-[50vh] m-2  flex-wrap border border-gray-300W">
           {/* <ScatterGraph data={data} /> */}
