@@ -21,11 +21,13 @@ import {
 import { ref, uploadBytes } from "firebase/storage";
 import { storage } from "@/Firebase/setup";
 import { Imagetype } from "@/types";
+import { useGetItemOnSessionChange } from "@/utils/islogin";
 
 const link =
   "https://firebasestorage.googleapis.com/v0/b/projectauthbackend.appspot.com/o/images";
 
 const Profile = () => {
+  useGetItemOnSessionChange();
   const name = useRef("");
   const [image, setImage] = useState<
     Imagetype | Uint8Array | Blob | ArrayBuffer
@@ -77,7 +79,7 @@ const Profile = () => {
       .then((r) => console.log("updated"))
       .catch((err) => console.log(err));
 
-    onClose;
+    onClose();
   };
 
   const imagelink = `${link}%2F${data1.image}?alt=media`;

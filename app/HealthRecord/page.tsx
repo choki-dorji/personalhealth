@@ -1,175 +1,203 @@
 "use client";
-import React, { ChangeEvent, useState } from "react";
-import ReactDOM from "react-dom";
-import Input1 from "@/components/Input";
-import { Button } from "@nextui-org/button";
-import { Healthdata } from "@/LIB/models/topic";
-// import { useSession } from "next-auth/react";
+import React from "react";
+import { Form, Field } from "react-final-form";
+import { Button } from "@nextui-org/react";
+import styles from "./health.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { usePostPrescriptionMutation } from "@/store/medicinereducer";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-function postApi(
-  diagonisis: string,
-  description: string,
-  medication: string,
-  otherinfo: string,
-  user: string
-) {
-  console.log(user);
-  return fetch("/api/HealthData", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      diagonisis: diagonisis,
-      description: description,
-      medication: medication,
-      otherinfo: otherinfo,
-      user: user,
-    }),
-  });
-}
+import { useDispatch } from "react-redux";
+import { getItem } from "@/store/reducer";
+import { useSession } from "next-auth/react";
+import { useGetItemOnSessionChange } from "@/utils/islogin";
 
 function Health() {
+  useGetItemOnSessionChange();
   const user = useSelector((state: any) => state.user);
-  const [DiaError, setDiaError] = useState("");
-  const [DescriptionError, setDescriptionError] = useState("");
-  const [MedicationError, setMedicationError] = useState("");
-  const [OtherInfoError, setOtherInfoError] = useState("");
 
-  // for data
-  const [Dia, setDia] = useState("");
-  const [Description, setDescription] = useState("");
-  const [Medication, setMedication] = useState("");
-  const [OtherInfo, setOtherInfo] = useState("");
+  // rtk call
+  const [post, { isLoading: isEditing, isSuccess, isError }] =
+    usePostPrescriptionMutation();
 
-  // nsdkvas
-  const validateFields = () => {
-    let isValid = true;
-
-    if (!Dia) {
-      setDiaError("Diagnosis is required");
-      isValid = false;
-    } else {
-      setDiaError("");
-    }
-
-    if (!Description) {
-      setDescriptionError("Description is required");
-      isValid = false;
-    } else {
-      setDescriptionError("");
-    }
-
-    if (!Medication) {
-      setMedicationError("Medication is required");
-      isValid = false;
-    } else {
-      setMedicationError("");
-    }
-
-    if (!OtherInfo) {
-      setOtherInfoError("Other Info is required");
-      isValid = false;
-    } else {
-      setOtherInfoError("");
-    }
-
-    return isValid;
+  const onsubmit = (values: any) => {
+    post({
+      diagonisis: values.diagonisis,
+      description: values.description,
+      medication: values.medication,
+      otherinfo: values.otherinfo,
+      user: user.user?.user?.email,
+    })
+      .then((r) => console.log("updated"))
+      .catch((err) => console.log(err));
+    // console.log("after yser");
   };
-
-  const submitForm = () => {
-    if (!validateFields()) {
-      return; // If any field is empty, stop form submission
-    }
-    postApi(Dia, Description, Medication, OtherInfo, user.user?.user?.email)
-      .then((response) => {
-        if (response.ok) {
-          setDia("");
-          setDescription("");
-          setMedication("");
-          setOtherInfo("");
-          toast.success("Record inserted successfully", {
-            position: "top-center",
-            autoClose: 3000, // Close the toast after 3 seconds
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-          // You might want to reset the form fields here
-        } else {
-          console.log("Failed to post data");
-        }
-      })
-      .catch((error) => {
-        console.error("An error occurred:", error);
-      });
-  };
-
+  if (isSuccess) {
+    toast.success("Record inserted successfully", {
+      position: "top-center",
+      autoClose: 3000, // Close the toast after 3 seconds
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+  const required = (value: any) =>
+    value ? undefined : "This field is required";
   return (
-    <div
-      style={{
-        marginBottom: "30px",
-        background: "grey",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
-      }}
-    >
-      <div className="flex flex-row">
-        <FontAwesomeIcon icon={faPlus} />
-        <h1 className="text-lg font-bold">Add Prescription</h1>
-      </div>
-      <h2>Save Your Data for Long Term Remembrance</h2>
-      <Input1
-        label="Diagnosis"
-        type="text"
-        value={Dia}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => setDia(e.target.value)}
-      />
-      {DiaError && <div style={{ color: "red" }}>{DiaError}</div>}{" "}
-      {/* Display error message */}
-      <Input1
-        label="Description"
-        type="text"
-        value={Description}
-        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setDescription(e.target.value)
-        }
-      />
-      {DescriptionError && (
-        <div style={{ color: "red" }}>{DescriptionError}</div>
-      )}{" "}
-      {/* Display error message */}
-      <Input1
-        label="Medication"
-        type="text"
-        value={Medication}
-        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setMedication(e.target.value)
-        }
-      />
-      {MedicationError && <div style={{ color: "red" }}>{MedicationError}</div>}{" "}
-      {/* Display error message */}
-      <Input1
-        label="Other Info"
-        type="text"
-        value={OtherInfo}
-        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setOtherInfo(e.target.value)
-        }
-      />
-      {OtherInfoError && <div style={{ color: "red" }}>{OtherInfoError}</div>}{" "}
-      {/* Display error message */}
-      <Button onClick={submitForm}>Post</Button>
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <Form onSubmit={onsubmit}>
+        {({ handleSubmit, values, submitting }) => (
+          <form onSubmit={handleSubmit}>
+            <Field
+              name="diagonisis"
+              component="input"
+              placeholder="Diagonisis"
+              validate={required}
+            >
+              {({ input, meta, placeholder }) => (
+                <div className={styles.div}>
+                  <label className={styles.label}>Diagnosis</label>
+                  <div className={styles.inputContainer}>
+                    <input
+                      {...input}
+                      placeholder={placeholder}
+                      className={
+                        meta.error && meta.touched
+                          ? styles.inputerror
+                          : styles.input
+                      }
+                    />
+                    {meta.touched && !meta.error && (
+                      <div className={styles.iconContainer}>
+                        <FontAwesomeIcon
+                          icon={faCheck}
+                          className={styles.icon}
+                        />
+                      </div>
+                    )}
+                  </div>
+                  {meta.error && meta.touched && (
+                    <span className={styles.span}>{meta.error}</span>
+                  )}
+                </div>
+              )}
+            </Field>
+
+            <Field
+              name="description"
+              component="input"
+              placeholder="Description"
+              validate={required}
+            >
+              {({ input, meta, placeholder }) => (
+                <div className={styles.div}>
+                  <label className={styles.label}>Description</label>
+                  <div className={styles.inputContainer}>
+                    <input
+                      {...input}
+                      placeholder={placeholder}
+                      className={
+                        meta.error && meta.touched
+                          ? styles.inputerror
+                          : styles.input
+                      }
+                    />
+                    {meta.touched && !meta.error && (
+                      <div className={styles.iconContainer}>
+                        <FontAwesomeIcon
+                          icon={faCheck}
+                          className={styles.icon}
+                        />
+                      </div>
+                    )}
+                  </div>
+                  {meta.error && meta.touched && (
+                    <span className={styles.span}>{meta.error}</span>
+                  )}
+                </div>
+              )}
+            </Field>
+
+            <Field
+              name="medication"
+              component="input"
+              placeholder="medication"
+              validate={required}
+            >
+              {({ input, meta, placeholder }) => (
+                <div className={styles.div}>
+                  <label className={styles.label}>Medication</label>
+                  <div className={styles.inputContainer}>
+                    <input
+                      {...input}
+                      placeholder={placeholder}
+                      className={
+                        meta.error && meta.touched
+                          ? styles.inputerror
+                          : styles.input
+                      }
+                    />
+                    {meta.touched && !meta.error && (
+                      <div className={styles.iconContainer}>
+                        <FontAwesomeIcon
+                          icon={faCheck}
+                          className={styles.icon}
+                        />
+                      </div>
+                    )}
+                  </div>
+                  {meta.error && meta.touched && (
+                    <span className={styles.span}>{meta.error}</span>
+                  )}
+                </div>
+              )}
+            </Field>
+
+            <Field
+              name="otherinfo"
+              component="input"
+              placeholder="Doctors Information"
+              validate={required}
+            >
+              {({ input, meta, placeholder }) => (
+                <div className={styles.div}>
+                  <label className={styles.label}>{placeholder}</label>
+                  <div className={styles.inputContainer}>
+                    <input
+                      {...input}
+                      placeholder={placeholder}
+                      className={
+                        meta.error && meta.touched
+                          ? styles.inputerror
+                          : styles.input
+                      }
+                    />
+                    {meta.touched && !meta.error && (
+                      <div className={styles.iconContainer}>
+                        <FontAwesomeIcon
+                          icon={faCheck}
+                          className={styles.icon}
+                        />
+                      </div>
+                    )}
+                  </div>
+                  {meta.error && meta.touched && (
+                    <span className={styles.span}>{meta.error}</span>
+                  )}
+                </div>
+              )}
+            </Field>
+
+            <Button type="submit" disabled={submitting ? true : false}>
+              {submitting ? "Submitting" : "Submit"}
+            </Button>
+          </form>
+        )}
+      </Form>
       <ToastContainer />
     </div>
   );
