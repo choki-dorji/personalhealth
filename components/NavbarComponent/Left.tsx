@@ -15,7 +15,12 @@ import Link from "next/link";
 import { links } from "./Links";
 import User1 from "../User/User";
 
-function Left() {
+interface Auth {
+  image: string;
+  email: string;
+}
+
+function Left(props: Auth) {
   return (
     <>
       <NavbarContent
@@ -26,7 +31,7 @@ function Left() {
           <ThemeSwitch />
         </NavbarItem>
         {/* <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem> */}
-        <User1 />
+        <User1 image={props.image} email={props.email} />
         {/* <Button onClick={() => signOut()}>Log Out</Button> */}
       </NavbarContent>
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">

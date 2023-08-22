@@ -56,6 +56,14 @@ export const AppSlice = createApi({
       query: () => `api/HealthData/all`,
       providesTags: ['prescription']
     }),
+    deleteAlarm : builder.mutation({
+      query: (id) => ({
+        url: `/api/alarm/${id}`, // Change this to the appropriate delete endpoint
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['alarm']
+      
+    })
 
     // blood pressure graph data
    
@@ -65,5 +73,5 @@ export const AppSlice = createApi({
   }),
 });
 
-export const { useGetAllPrescriptionQuery, useGetAlarmQuery, useEditPrescriptionMutation ,usePostAlarmMutation, useGetPrescriptionQuery, usePostPrescriptionMutation, useGetDetailPrescriptionQuery, useDeletePrescriptionMutation } =
+export const { useDeleteAlarmMutation, useGetAllPrescriptionQuery, useGetAlarmQuery, useEditPrescriptionMutation ,usePostAlarmMutation, useGetPrescriptionQuery, usePostPrescriptionMutation, useGetDetailPrescriptionQuery, useDeletePrescriptionMutation } =
   AppSlice;

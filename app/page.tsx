@@ -67,8 +67,6 @@ function Home() {
       ? formatDateToString(bpdata.Healthdata[bpdata.Healthdata.length - 1].date)
       : "";
 
-  // const data = Loginuserdata(bpdata.Healthdata, user.user?.user?.email);
-
   const specificuser = Loginuserdata(
     bpdata && bpdata.Healthdata,
     user.user?.user?.email

@@ -118,7 +118,6 @@ export default function Prescription(props: Presc) {
       {/* popup for delete */}
       <Modal isOpen={isOpendelete} onOpenChange={opendeletechange}>
         <ModalDelete
-          onClose={onclose}
           onDelete={() => {
             deleteHandler(props._id);
             opendeletechange;
@@ -128,7 +127,7 @@ export default function Prescription(props: Presc) {
 
       {/* edit modal */}
       <Modal isOpen={isOpenedit} onOpenChange={openeditchange}>
-        <ModalEdit onClose={onclose} id={props._id} onedit={openeditchange} />
+        <ModalEdit id={props._id} onedit={openeditchange} />
       </Modal>
 
       <ToastContainer />
