@@ -57,21 +57,15 @@ export interface Bp{
 export interface BpData{
   Healthdata: Bp[]
 }
-
 export interface bloodData{
-  user: string,
-  Healthdata: [
-    month: string,
-    
-    high: [
-      value: number,
-      date: string,
-    ], 
-    low: [
-      value: number,
-      date: string,
+    user: string,
+    Healthdata:[
+      {
+        month: string,
+        high: [ { value: number, date: string } ],
+        low: [ { value: number, date: string } ]
+      }
     ]
-  ]
 }
 
 export interface PaginationProps {

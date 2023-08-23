@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import PressureBarGraph from "@/components/chart/ChartBp";
 import { useGetBlooddataQuery } from "@/store/bp";
 import Paginations from "@/components/Pagination/pagination";
-import { User, loginuser } from "@/types";
+import { User, loginuser, bloodData } from "@/types";
 import { useGetItemOnSessionChange } from "@/utils/islogin";
 import Loader from "@/components/Loader/load";
 
@@ -22,7 +22,7 @@ interface items {
 function BP() {
   useGetItemOnSessionChange();
   // const userloggedin = useSelector((state: User | loginuser) => state.user);
-  const userloggedin = useSelector((state: any) => state.user);
+  const userloggedin: loginuser = useSelector((state: any) => state.user);
 
   const [currentPage, setCurrentPage] = useState(1);
   const { data: data1, isLoading, error } = useGetBpQuery();
@@ -43,7 +43,7 @@ function BP() {
     return <p>error</p>;
   }
 
-  console.log(userloggedin);
+  console.log(blooddata);
 
   const dataloggedin = blooddata?.Healthdata.filter(
     (data: any) => data.user === userloggedin?.user?.user?.email
@@ -105,6 +105,7 @@ function BP() {
     return formattedDate;
   }
   let description: string;
+  console.log(dataloggedin);
 
   return (
     <>

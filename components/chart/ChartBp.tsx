@@ -2,21 +2,22 @@ import { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
 
 interface Data {
-  data: [
-    user: string,
-    data: [
+  data: {
+    user: string;
+    Healthdata: [
       month: string,
       high: [value: number, date: string],
       low: [value: number, date: string]
-    ]
-  ];
+    ];
+  };
 }
 interface ChartData {
   date: string;
   value: string;
 }
 
-const PressureBarGraph = (props: Data) => {
+// const PressureBarGraph = (props: Data) => {
+const PressureBarGraph = (props: any) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const chartRef = useRef<Chart | null>(null);
 
@@ -44,14 +45,14 @@ const PressureBarGraph = (props: Data) => {
     if (canvas) {
       const ctx = canvas.getContext("2d");
 
-      props.data.forEach((userEntry) => {
-        userEntry.data.forEach((dataEntry) => {
-          dataEntry.high.forEach((highEntry) => {
+      props.data.forEach((userEntry: any) => {
+        userEntry.data.forEach((dataEntry: any) => {
+          dataEntry.high.forEach((highEntry: any) => {
             allHighData.push(highEntry.value);
             allDates.push(highEntry.date);
           });
 
-          dataEntry.low.forEach((lowEntry) => {
+          dataEntry.low.forEach((lowEntry: any) => {
             allLowData.push(lowEntry.value);
           });
         });
