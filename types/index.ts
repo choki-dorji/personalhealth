@@ -106,7 +106,7 @@ export interface User{
 
 export interface loginuser{
   user:{
-    user?:{
+    user:{
       name?: string | null | undefined;
       email?: string | null | undefined;
       image?: string | null | undefined;

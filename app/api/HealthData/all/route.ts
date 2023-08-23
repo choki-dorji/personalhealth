@@ -35,7 +35,7 @@ export async function GET() {
     });
 
     // Sort the groupedData array by month in ascending order
-    groupedData.sort((a, b) => a.month.localeCompare(b.month));
+    groupedData.sort((a :any, b :any) => a.month.localeCompare(b.month));
   }
 
   const user = response.length > 0 ? response[0].user : "No user data available";
