@@ -12,7 +12,14 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 
-export default function App() {
+interface Auth {
+  image: string;
+  email: string;
+}
+const link =
+  "https://firebasestorage.googleapis.com/v0/b/projectauthbackend.appspot.com/o/images%2F";
+
+export default function App(props: Auth) {
   const userimage = useSelector((state: any) => state.user);
 
   return (
@@ -25,7 +32,7 @@ export default function App() {
             className="transition-transform"
             src={
               userimage
-                ? userimage.user?.user?.image
+                ? `${link}${props.image}?alt=media`
                 : "https://i.pravatar.cc/150?u=a042581f4e29026704d"
             }
           />
@@ -37,7 +44,9 @@ export default function App() {
         >
           <DropdownItem key="profile" className="h-14 gap-2">
             <p className="font-semibold">Signed in as</p>
-            <p className="font-semibold">{userimage.user?.user?.email}</p>
+            <p className="font-semibold">
+              {userimage.user?.user?.email || props.email}
+            </p>
           </DropdownItem>
           {/* <DropdownItem key="settings">My Settings</DropdownItem> */}
           {/* <DropdownItem key="team_settings">Team Settings</DropdownItem> */}

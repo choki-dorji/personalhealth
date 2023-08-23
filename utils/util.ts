@@ -16,18 +16,34 @@ export function format12Hour(time24: string){
 }
 
 export const Alarms = (specificdata: Alarm[] | undefined, time: any) => {
-    const filtered = specificdata && specificdata.filter((item) => {
-      // Assuming item.time is in the format "HH:mm"
-      const itemHour = parseInt(format12Hour(item.time.split(":")[0]));
-      return itemHour === time.user
-    // const filtered = itemHour.filter((item) => {
-    //     item === time.user;
-    // // })
-    // console.log(filtered);
-    // return filtered
-    });
+    console.log(specificdata)
+    // console.log(time.user)
+    if(time.user == 0){
+        return specificdata
+    }
+    if(time.user === 1){
+        const timeRange = [4, 5, 6, 7, 8, 9, 10];
+        const time = specificdata?.filter((t) => timeRange.includes(parseInt(t.time)));
+        // console.log(time);
+        return time
+    }
+    if(time.user === 2){
+        const timeRange = [11,12,13,14,15,16,0];
+        const time = specificdata?.filter((t) => timeRange.includes(parseInt(t.time)));
+        // console.log(time);
 
-    return filtered
+        return time
+    }
+    if(time.user === 3){
+    
+        const timeRange = [17,18,19,20,21,22,23,24, 1,2,3]
+        const time = specificdata?.filter((t) => timeRange.includes(parseInt(t.time)));       
+        return time
+    }
+
+    
+
+
 }
 
 // 

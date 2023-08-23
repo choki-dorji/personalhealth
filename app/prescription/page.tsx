@@ -12,6 +12,7 @@ import {
 import Loader from "@/components/Loader/load";
 import { Loginuserdata } from "@/utils/util";
 import { Presc } from "@/types";
+import { useGetItemOnSessionChange } from "@/utils/islogin";
 
 interface State {
   text: string;
@@ -21,6 +22,7 @@ interface inState {
 }
 
 function Page() {
+  useGetItemOnSessionChange();
   const { data, isLoading, error } = useGetPrescriptionQuery();
   const searchText = useSelector((state: inState) => state.search);
   const userdata = useSelector((state: any) => state.user);

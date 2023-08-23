@@ -9,25 +9,14 @@ import {
 } from "@nextui-org/react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-interface EditModalProps {
-  id: string;
-  onedit: () => void;
-  onClose: () => void;
-}
+import { EditModalProps, EditedData } from "@/types";
 
 import {
   useGetDetailPrescriptionQuery,
   useEditPrescriptionMutation,
 } from "@/store/medicinereducer";
 
-interface EditedDataResponse {
-  data: {
-    status: string;
-  };
-}
-
-const ModalEdit: React.FC<EditModalProps> = ({ id, onedit, onClose }) => {
+const ModalEdit: React.FC<EditModalProps> = ({ id, onedit }) => {
   const { data, isLoading } = useGetDetailPrescriptionQuery(id);
   const [editPrescription, { isLoading: isEditing, isSuccess, isError }] =
     useEditPrescriptionMutation();
@@ -55,13 +44,15 @@ const ModalEdit: React.FC<EditModalProps> = ({ id, onedit, onClose }) => {
       OtherInformation: otherInformation,
     };
 
-    const editedData = await editPrescription({
+    const editedData: EditedData = await editPrescription({
       id: id,
       data: updatedData,
     });
 
+    console.log(editedData);
+
     // console.log(editedData);
-    if (editedData?.data.status === "success") {
+    if (editedData?.data?.status === "success") {
       toast.success("Prescription updated successfully", {
         position: "top-center",
         hideProgressBar: false,
@@ -121,49 +112,53 @@ const ModalEdit: React.FC<EditModalProps> = ({ id, onedit, onClose }) => {
 
   return (
     <ModalContent>
-      <ToastContainer />
-      <ModalHeader className="flex flex-col gap-1">
-        Edit Prescription
-      </ModalHeader>
-      <ModalBody>
-        <Input
-          autoFocus
-          label="Diagnosis"
-          variant="bordered"
-          value={diagnosis}
-          onChange={(e) => setDiagnosis(e.target.value)}
-        />
-        <Input
-          label="Description"
-          variant="bordered"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <Input
-          label="Medicine"
-          variant="bordered"
-          value={medicine}
-          onChange={(e) => setMedicine(e.target.value)}
-        />
-        <Input
-          label="Doctor's Message"
-          variant="bordered"
-          value={otherInformation}
-          onChange={(e) => setOtherInformation(e.target.value)}
-        />
-      </ModalBody>
-      <ModalFooter>
-        <Button color="danger" variant="flat" onClick={onClose}>
-          Close
-        </Button>
-        <Button
-          color="primary"
-          onClick={handleUpdateClick}
-          disabled={isEditing}
-        >
-          {isEditing ? "Updating..." : "Update"}
-        </Button>
-      </ModalFooter>
+      {(onClose: void) => (
+        <>
+          <ToastContainer />
+          <ModalHeader className="flex flex-col gap-1">
+            Edit Prescription
+          </ModalHeader>
+          <ModalBody>
+            <Input
+              autoFocus
+              label="Diagnosis"
+              variant="bordered"
+              value={diagnosis}
+              onChange={(e) => setDiagnosis(e.target.value)}
+            />
+            <Input
+              label="Description"
+              variant="bordered"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <Input
+              label="Medicine"
+              variant="bordered"
+              value={medicine}
+              onChange={(e) => setMedicine(e.target.value)}
+            />
+            <Input
+              label="Doctor's Message"
+              variant="bordered"
+              value={otherInformation}
+              onChange={(e) => setOtherInformation(e.target.value)}
+            />
+          </ModalBody>
+          <ModalFooter>
+            <Button color="danger" variant="flat" onClick={onClose}>
+              Close
+            </Button>
+            <Button
+              color="primary"
+              onClick={handleUpdateClick}
+              disabled={isEditing}
+            >
+              {isEditing ? "Updating..." : "Update"}
+            </Button>
+          </ModalFooter>
+        </>
+      )}
     </ModalContent>
   );
 };

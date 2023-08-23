@@ -6,21 +6,24 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-  useDisclosure,
 } from "@nextui-org/react";
 
 interface PrescriptionModalContentProps {
   onDelete: () => void;
+  isLoading: boolean;
 }
 
-const ModalDelete: React.FC<PrescriptionModalContentProps> = ({ onDelete }) => {
+const Delete: React.FC<PrescriptionModalContentProps> = ({
+  onDelete,
+  isLoading,
+}) => {
   return (
     <>
       <ModalContent>
         {(onClose: void) => (
           <>
             <ModalHeader className="flex flex-col gap-1">
-              Delete Prescription
+              Delete Alarm
             </ModalHeader>
             <ModalBody>
               <p>Are you sure?</p>
@@ -29,8 +32,15 @@ const ModalDelete: React.FC<PrescriptionModalContentProps> = ({ onDelete }) => {
               <Button color="danger" variant="light" onClick={onClose}>
                 No
               </Button>
-              <Button color="primary" onClick={onDelete}>
-                Yes
+
+              <Button
+                color="primary"
+                onClick={() => {
+                  onDelete();
+                  onClose();
+                }}
+              >
+                {isLoading ? "Deleting..." : "Delete"}
               </Button>
             </ModalFooter>
           </>
@@ -39,4 +49,4 @@ const ModalDelete: React.FC<PrescriptionModalContentProps> = ({ onDelete }) => {
     </>
   );
 };
-export default ModalDelete;
+export default Delete;

@@ -8,6 +8,8 @@ import PressureBarGraph from "@/components/chart/ChartBp";
 import { useGetBlooddataQuery } from "@/store/bp";
 import Paginations from "@/components/Pagination/pagination";
 import { User, loginuser } from "@/types";
+import { useGetItemOnSessionChange } from "@/utils/islogin";
+import Loader from "@/components/Loader/load";
 
 interface items {
   _id: string;
@@ -18,6 +20,7 @@ interface items {
 }
 
 function BP() {
+  useGetItemOnSessionChange();
   const userloggedin = useSelector((state: User | loginuser) => state.user);
   const [currentPage, setCurrentPage] = useState(1);
   const { data: data1, isLoading, error } = useGetBpQuery();
@@ -28,19 +31,23 @@ function BP() {
   } = useGetBlooddataQuery();
 
   if (isLoading || loader) {
-    return <p>Loading</p>;
+    return (
+      <div className="flex justify-center mt-3">
+        <Loader />
+      </div>
+    );
   }
   if (error) {
     return <p>error</p>;
   }
 
-  console.log(blooddata);
+  console.log(userloggedin);
 
   const dataloggedin = blooddata?.Healthdata.filter(
-    (data: User) => data.user === userloggedin?.user?.user?.email
+    (data: any) => data.user === userloggedin?.user?.user?.email
   );
 
-  console.log(userloggedin);
+  console.log(dataloggedin);
 
   // console.log(userloggedin);
   const loggedinuser =
@@ -64,6 +71,8 @@ function BP() {
   // Get the data for the current page
   const currentPageData =
     loggedinuser && loggedinuser.slice(startIndex, endIndex);
+
+  console.log(dataloggedin);
 
   // end pagination //////////////////////////////////////////////
 
@@ -96,8 +105,7 @@ function BP() {
   let description: string;
 
   return (
-    <div>
-      <Add label1="Highend" label2="lowend" />
+    <>
       <div className="flex justify-center">
         <div className="mt-4 w-[140vh] h-[50vh] m-2  flex-wrap border border-gray-300W">
           {/* <ScatterGraph data={data} /> */}
@@ -138,11 +146,11 @@ function BP() {
         <Paginations
           initialPage={currentPage}
           pageSize={pageSize}
-          total={totalPage}
+          total={totalPage ?? 0}
           onChange={(page: number) => handleChange(page)}
         />
       </div>
-    </div>
+    </>
   );
 }
 

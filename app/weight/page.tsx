@@ -8,13 +8,12 @@ import { useGetBMIQuery } from "@/store/bp";
 import Paginations from "@/components/Pagination/pagination";
 import { useGetBMIDataQuery } from "@/store/bp";
 import BMIGraph from "@/components/chart/GraphBMI";
-interface BMIitem {
-  _id: string;
-  Height: number;
-  weight: number;
-}
+import { BMIitem } from "@/types";
+import { useGetItemOnSessionChange } from "@/utils/islogin";
+import Loader from "@/components/Loader/load";
 
 function BMI() {
+  useGetItemOnSessionChange();
   const logginuser = useSelector((state: any) => state.user);
   const [currentPage, setCurrentPage] = useState(1);
   const { data: data1, isLoading, error } = useGetBMIQuery();
@@ -25,7 +24,11 @@ function BMI() {
   } = useGetBMIDataQuery();
 
   if (isLoading || loader) {
-    return <p>Loading</p>;
+    return (
+      <div className="flex justify-center">
+        <Loader />
+      </div>
+    );
   }
   if (error || bloodError) {
     return <p>error</p>;
@@ -34,12 +37,12 @@ function BMI() {
     (data: any) => data.user === logginuser.user?.user?.email
   );
 
-  const forauth =
-    data1 &&
-    data1.data.filter((data) => data.user === logginuser.user?.user?.email);
+  const forauth = data1?.data?.filter(
+    (data) => data.user === logginuser.user?.user?.email
+  );
 
   const pageSize = 5;
-  const totalitems = forauth && forauth.length;
+  const totalitems = forauth?.length;
   const totalPage = totalitems && Math.ceil(totalitems / pageSize);
 
   const handleChange = (newPage: number) => {
@@ -53,7 +56,18 @@ function BMI() {
 
   return (
     <div>
-      <AddWeight label1="Height" label2="weight" />
+      <div className="flex justify-center">
+        <h1>Add BMI data</h1>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+        }}
+      >
+        <AddWeight />
+      </div>
       <div className="flex justify-center">
         <div className="mt-4 w-[140vh] h-[50vh] m-2  flex-wrap border border-gray-300W">
           {/* <ScatterGraph data={data} /> */}
@@ -88,7 +102,7 @@ function BMI() {
         <Paginations
           initialPage={currentPage}
           pageSize={pageSize}
-          total={totalPage}
+          total={totalPage ?? 0}
           onChange={(page: number) => handleChange(page)}
         />
       </div>

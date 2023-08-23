@@ -31,7 +31,7 @@ export default function ScatterPlot() {
       return;
     }
 
-    const specificuser = data1.Healthdata.filter(
+    const specificuser = data1?.Healthdata.filter(
       (d: any) => d.user === userdata.user?.user?.email
     );
     console.log(specificuser);

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Prescription } from "@/types";
+import { Prescription, Presc } from "@/types";
 import { Alarmdata, Alldata } from "@/types";
 
 
@@ -36,7 +36,7 @@ export const AppSlice = createApi({
       query: (id) => `api/HealthData/${id}`,
       providesTags: ['prescription']
     }),
-    deletePrescription: builder.mutation({
+    deletePrescription: builder.mutation<Presc, string>({
       query: (id) => ({
         url: `/api/HealthData/${id}`, // Change this to the appropriate delete endpoint
         method: 'DELETE',
@@ -56,6 +56,14 @@ export const AppSlice = createApi({
       query: () => `api/HealthData/all`,
       providesTags: ['prescription']
     }),
+    deleteAlarm : builder.mutation({
+      query: (id) => ({
+        url: `/api/alarm/${id}`, // Change this to the appropriate delete endpoint
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['alarm']
+      
+    })
 
     // blood pressure graph data
    
@@ -65,5 +73,5 @@ export const AppSlice = createApi({
   }),
 });
 
-export const { useGetAllPrescriptionQuery, useGetAlarmQuery, useEditPrescriptionMutation ,usePostAlarmMutation, useGetPrescriptionQuery, usePostPrescriptionMutation, useGetDetailPrescriptionQuery, useDeletePrescriptionMutation } =
+export const { useDeleteAlarmMutation, useGetAllPrescriptionQuery, useGetAlarmQuery, useEditPrescriptionMutation ,usePostAlarmMutation, useGetPrescriptionQuery, usePostPrescriptionMutation, useGetDetailPrescriptionQuery, useDeletePrescriptionMutation } =
   AppSlice;
