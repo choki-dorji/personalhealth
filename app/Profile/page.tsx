@@ -34,9 +34,7 @@ interface Image {
 const Profile = () => {
   useGetItemOnSessionChange();
   const name = useRef("");
-  const [image, setImage] = useState<
-    Imagetype | Uint8Array | Blob | ArrayBuffer
-  >();
+  const [image, setImage] = useState<Uint8Array | Blob | ArrayBuffer>();
 
   const address = useRef("");
   const dob = useRef("");
@@ -77,18 +75,19 @@ const Profile = () => {
       `images/${image instanceof File ? image.name : "defaultName"}`
     );
 
-    uploadBytes(imageref, image)
-      .then(() => {
-        console.log("bj");
-      })
-      .catch((e) => console.log(e));
+    image &&
+      uploadBytes(imageref, image)
+        .then(() => {
+          console.log("bj");
+        })
+        .catch((e) => console.log(e));
 
     edit({
       id: iduser,
       data: {
         name: name.current,
         address: address.current,
-        image: image?.name ?? image,
+        image: image instanceof File ? image.name : "defaultName",
       },
     })
       .then((r) => console.log("updated"))
