@@ -1,17 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
+import { StateType } from "@/types";
 
 import {
   useGetAlarmQuery,
   usePostAlarmMutation,
 } from "@/store/medicinereducer";
 
-interface StateType {
-  time: string | undefined;
-  medicine: string | undefined;
-  notification: string | undefined;
-}
 function Alarm() {
   const [state, setState] = useState<StateType>({
     time: undefined,
@@ -20,8 +16,6 @@ function Alarm() {
   });
 
   const { data } = useGetAlarmQuery();
-  // console.log(data);
-
   const [postData, { isLoading }] = usePostAlarmMutation();
 
   const adddata = async (event: React.MouseEvent) => {

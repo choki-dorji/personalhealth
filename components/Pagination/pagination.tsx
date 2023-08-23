@@ -1,16 +1,11 @@
 import React from "react";
 import { Pagination } from "@nextui-org/react";
-interface Props {
-  initialPage: number;
-  pageSize: number;
-  total: number;
-  onChange: (page: number) => void;
-}
+import { PaginationProps } from "@/types";
 
-export default function Paginations(props: Props) {
+export default function Paginations(props: PaginationProps) {
   return (
     <Pagination
-      total={props?.total}
+      total={props.total}
       initialPage={props.initialPage}
       pageSize={props.pageSize}
       onChange={props.onChange}

@@ -9,13 +9,13 @@ import {
 } from "@nextui-org/react";
 
 interface PrescriptionModalContentProps {
-  onClose: () => any;
   onDelete: () => void;
+  isLoading: boolean;
 }
 
 const Delete: React.FC<PrescriptionModalContentProps> = ({
-  onClose,
   onDelete,
+  isLoading,
 }) => {
   return (
     <>
@@ -32,8 +32,15 @@ const Delete: React.FC<PrescriptionModalContentProps> = ({
               <Button color="danger" variant="light" onClick={onClose}>
                 No
               </Button>
-              <Button color="primary" onClick={onDelete}>
-                Yes
+
+              <Button
+                color="primary"
+                onClick={() => {
+                  onDelete();
+                  onClose();
+                }}
+              >
+                {isLoading ? "Deleting..." : "Delete"}
               </Button>
             </ModalFooter>
           </>

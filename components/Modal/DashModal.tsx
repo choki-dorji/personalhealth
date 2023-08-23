@@ -13,7 +13,7 @@ import {
 import { usePostAlarmMutation } from "@/store/medicinereducer";
 
 function DashModal() {
-  const [AlarmPost] = usePostAlarmMutation();
+  const [AlarmPost, { isLoading }] = usePostAlarmMutation();
   const user = useSelector((state: any) => state.user);
   const [medicine, setMedicine] = useState("");
   const [time, setTime] = useState("");
@@ -73,7 +73,7 @@ function DashModal() {
                 type="submit"
                 // disabled={isButtonDisabled} // Disable the button if inputs are empty
               >
-                Create
+                {isLoading ? "Creating..." : "Create"}
               </Button>
             </ModalFooter>
           </form>

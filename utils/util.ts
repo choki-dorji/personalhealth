@@ -16,7 +16,7 @@ export function format12Hour(time24: string){
 }
 
 export const Alarms = (specificdata: Alarm[] | undefined, time: any) => {
-    // console.log(specificdata)
+    console.log(specificdata)
     // console.log(time.user)
     if(time.user == 0){
         return specificdata
@@ -24,16 +24,20 @@ export const Alarms = (specificdata: Alarm[] | undefined, time: any) => {
     if(time.user === 1){
         const timeRange = [4, 5, 6, 7, 8, 9, 10];
         const time = specificdata?.filter((t) => timeRange.includes(parseInt(t.time)));
+        // console.log(time);
         return time
     }
     if(time.user === 2){
-        const timeRange = [11,12,13,14,15,16];
+        const timeRange = [11,12,13,14,15,16,0];
         const time = specificdata?.filter((t) => timeRange.includes(parseInt(t.time)));
+        // console.log(time);
+
         return time
     }
     if(time.user === 3){
-        const timeRange = [17,18,19,20,21,22,23,24]
-        const time = specificdata?.filter((t) => timeRange.includes(parseInt(t.time)));
+    
+        const timeRange = [17,18,19,20,21,22,23,24, 1,2,3]
+        const time = specificdata?.filter((t) => timeRange.includes(parseInt(t.time)));       
         return time
     }
 

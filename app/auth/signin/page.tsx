@@ -20,36 +20,31 @@ function Signin() {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.form}>
-        <h2>Login</h2>
-        <div className={styles.inputGroup}>
-          <label className={styles.label}>Email</label>
-          <input
-            type="email"
-            onChange={(e) => (email.current = e.target.value)}
-            className={styles.input}
-          />
-        </div>
-        <div className={styles.inputGroup}>
-          <label className={styles.label}>Password</label>
-          <input
-            type="password"
-            onChange={(e) => (password.current = e.target.value)}
-            className={styles.input}
-          />
-        </div>
-        <button className={styles.button} onClick={onSubmit}>
-          Login
-        </button>
-        <p className="mr-3 mt-3">Dont have an account yet? </p>
-        <Link href="/auth/signup" className={styles.link}>
-          Register
-        </Link>
+    <>
+      <div className={styles.inputGroup}>
+        <label className={styles.label}>Email</label>
+        <input
+          type="email"
+          onChange={(e) => (email.current = e.target.value)}
+          className={styles.input}
+        />
       </div>
-      {/* <ToastContainer /> */}
-    </div>
-    /////
+      <div className={styles.inputGroup}>
+        <label className={styles.label}>Password</label>
+        <input
+          type="password"
+          onChange={(e) => (password.current = e.target.value)}
+          className={styles.input}
+        />
+      </div>
+      <button className={styles.button} onClick={onSubmit}>
+        Login
+      </button>
+      <p className="mr-3 mt-3">Dont have an account yet? </p>
+      <Link href="/auth/signup" className={styles.link}>
+        Register
+      </Link>
+    </>
   );
 }
 

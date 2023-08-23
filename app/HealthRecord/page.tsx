@@ -9,9 +9,6 @@ import { usePostPrescriptionMutation } from "@/store/medicinereducer";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch } from "react-redux";
-import { getItem } from "@/store/reducer";
-import { useSession } from "next-auth/react";
 import { useGetItemOnSessionChange } from "@/utils/islogin";
 
 function Health() {
@@ -22,7 +19,7 @@ function Health() {
   const [post, { isLoading: isEditing, isSuccess, isError }] =
     usePostPrescriptionMutation();
 
-  const onsubmit = (values: any) => {
+  const onsubmit = (values: any, form: any) => {
     post({
       diagonisis: values.diagonisis,
       description: values.description,
@@ -33,6 +30,7 @@ function Health() {
       .then((r) => console.log("updated"))
       .catch((err) => console.log(err));
     // console.log("after yser");
+    form.reset();
   };
   if (isSuccess) {
     toast.success("Record inserted successfully", {
@@ -49,7 +47,7 @@ function Health() {
     value ? undefined : "This field is required";
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
-      <Form onSubmit={onsubmit}>
+      <Form onSubmit={(values, form) => onsubmit(values, form)}>
         {({ handleSubmit, values, submitting }) => (
           <form onSubmit={handleSubmit}>
             <Field

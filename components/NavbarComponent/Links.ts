@@ -17,11 +17,7 @@ export const links = [
       name: "Add Record",
       href: "",
     },
-    {
-      id: 4,
-      name: "About",
-      href: "/about",
-    },
+    
     {
       id: 5,
       name: "Prescription",

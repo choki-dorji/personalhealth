@@ -83,7 +83,7 @@ function Add() {
                   <div className={styles.inputContainer}>
                     <input
                       {...input}
-                      type="integer"
+                      type="number"
                       placeholder={placeholder}
                       className={
                         meta.error && meta.touched
@@ -121,7 +121,7 @@ function Add() {
                   <div className={styles.inputContainer}>
                     <input
                       {...input}
-                      type="integer"
+                      type="number"
                       placeholder={placeholder}
                       className={
                         meta.error && meta.touched

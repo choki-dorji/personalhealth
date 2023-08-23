@@ -59,7 +59,7 @@ export interface BpData{
 }
 
 export interface bloodData{
-  Healthdata: {
+  Healthdata: [
     month: string,
     high: [
       value: number,
@@ -69,7 +69,14 @@ export interface bloodData{
       value: number,
       date: string,
     ]
-  }
+  ]
+}
+
+export interface PaginationProps {
+  initialPage: number;
+  pageSize: number;
+  total: number;
+  onChange: (page: number) => void;
 }
 
 export interface BMIData {
@@ -122,4 +129,24 @@ export interface onedata{
 export interface Alldata{
   Healthdata: onedata[]
 }
+export interface BMIitem {
+  _id: string;
+  Height: number;
+  weight: number;
+}
+export interface EditModalProps {
+  id: string;
+  onedit: () => void;
+}
+export interface EditedData {
+data?: {
+  status: string,
   
+}
+}
+
+export interface StateType {
+  time: string | undefined;
+  medicine: string | undefined;
+  notification: string | undefined;
+}

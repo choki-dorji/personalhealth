@@ -28,6 +28,10 @@ function Home() {
   useGetItemOnSessionChange();
   const user = useSelector((state: any) => state.user);
   //end userdata
+  // const { data: session, status } = useSession({
+  //   required: true,
+  // });
+  console.log(user);
 
   const {
     data: data1,
@@ -62,17 +66,15 @@ function Home() {
   // console.log(user);
   const loginuser = Loginuserdata(BMIQuery?.data, user.user?.user?.email);
 
-  const date =
-    bpdata && bpdata.Healthdata.length > 0
-      ? formatDateToString(bpdata.Healthdata[bpdata.Healthdata.length - 1].date)
-      : "";
-
-  // const data = Loginuserdata(bpdata.Healthdata, user.user?.user?.email);
-
   const specificuser = Loginuserdata(
     bpdata && bpdata.Healthdata,
     user.user?.user?.email
   );
+  // console.log(specificuser);
+  const date =
+    specificuser && specificuser.length > 0
+      ? formatDateToString(specificuser[specificuser.length - 1].date)
+      : "";
 
   return (
     <>
@@ -102,7 +104,15 @@ function Home() {
                   } , height=${loginuser[loginuser.length - 1].Height}`
                 : "Add data to display"
             }
-            content="Over Weight"
+            content={
+              loginuser && loginuser.length > 0
+                ? loginuser[loginuser.length - 1].BMI > 24
+                  ? "You are over Weight"
+                  : loginuser[loginuser.length - 1].BMI < 18
+                  ? "You are Under Weight"
+                  : "You are Normal"
+                : ""
+            }
           />
           <Card1
             title="Blood Pressure"
@@ -116,11 +126,11 @@ function Home() {
             content={
               specificuser && specificuser.length > 0
                 ? specificuser[specificuser.length - 1].highPressure > 120
-                  ? "High Pressure"
+                  ? "High BP"
                   : specificuser &&
                     specificuser[specificuser.length - 1].highPressure < 80
-                  ? "Pressure"
-                  : "normal"
+                  ? "Low BP"
+                  : "Normal BP"
                 : "no data"
             }
             footer={`${date}`}
