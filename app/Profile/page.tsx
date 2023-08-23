@@ -9,7 +9,7 @@ import {
   useEditFireMutation,
   useGetFireDataidQuery,
 } from "@/store/firebase";
-import { Button } from "@nextui-org/Button";
+import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { Image } from "@nextui-org/react";
 import {
