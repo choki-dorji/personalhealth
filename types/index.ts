@@ -5,7 +5,6 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 };
 
 export interface Presc{
-  
     _id: string,
     user?: string,
     Diagonisis: string,
@@ -145,4 +144,12 @@ export interface StateType {
   time: string | undefined;
   medicine: string | undefined;
   notification: string | undefined;
+}
+
+export interface editPrescription{
+  id: string,
+  data: { diagonisis:string,
+  description: string,
+  Medicine: string,
+  OtherInformation: string,}
 }

@@ -5,11 +5,11 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-  Input,
 } from "@nextui-org/react";
+import { Input } from "@nextui-org/input";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { EditModalProps, EditedData } from "@/types";
+import { EditModalProps, EditedData, editPrescription } from "@/types";
 
 import {
   useGetDetailPrescriptionQuery,
@@ -44,15 +44,18 @@ const ModalEdit: React.FC<EditModalProps> = ({ id, onedit }) => {
       OtherInformation: otherInformation,
     };
 
-    const editedData: EditedData = await editPrescription({
+    const editedData: any = await editPrescription({
       id: id,
       data: updatedData,
     });
+    if (isLoading) {
+      return <p>loading</p>;
+    }
 
     console.log(editedData);
 
-    // console.log(editedData);
-    if (editedData?.data?.status === "success") {
+    // console.log(isSuccess);
+    if (editedData.data.status === "success") {
       toast.success("Prescription updated successfully", {
         position: "top-center",
         hideProgressBar: false,
@@ -68,44 +71,48 @@ const ModalEdit: React.FC<EditModalProps> = ({ id, onedit }) => {
   if (isLoading) {
     return (
       <ModalContent>
-        <ModalHeader className="flex flex-col gap-1">
-          Edit Prescription
-        </ModalHeader>
-        <ModalBody>
-          <Input
-            autoFocus
-            label="Diagnosis"
-            variant="bordered"
-            value="Loading..." // Placeholder text or loading indicator
-            disabled // Disable the input while loading
-          />
-          <Input
-            label="Description"
-            variant="bordered"
-            value="Loading..."
-            disabled
-          />
-          <Input
-            label="Medicine"
-            variant="bordered"
-            value="Loading..."
-            disabled
-          />
-          <Input
-            label="Doctor's Message"
-            variant="bordered"
-            value="Loading..."
-            disabled
-          />
-        </ModalBody>
-        <ModalFooter>
-          <Button color="danger" variant="flat" onClick={onClose}>
-            Close
-          </Button>
-          <Button color="primary" disabled>
-            Update
-          </Button>
-        </ModalFooter>
+        {(onClose: any) => (
+          <>
+            <ModalHeader className="flex flex-col gap-1">
+              Edit Prescription
+            </ModalHeader>
+            <ModalBody>
+              <Input
+                autoFocus
+                label="Diagnosis"
+                variant="bordered"
+                value="Loading..." // Placeholder text or loading indicator
+                disabled // Disable the input while loading
+              />
+              <Input
+                label="Description"
+                variant="bordered"
+                value="Loading..."
+                disabled
+              />
+              <Input
+                label="Medicine"
+                variant="bordered"
+                value="Loading..."
+                disabled
+              />
+              <Input
+                label="Doctor's Message"
+                variant="bordered"
+                value="Loading..."
+                disabled
+              />
+            </ModalBody>
+            <ModalFooter>
+              <Button color="danger" variant="flat" onClick={onClose}>
+                Close
+              </Button>
+              <Button color="primary" disabled>
+                Update
+              </Button>
+            </ModalFooter>
+          </>
+        )}
       </ModalContent>
     );
   }

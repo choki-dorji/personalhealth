@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Prescription, Presc } from "@/types";
-import { Alarmdata, Alldata } from "@/types";
+import { Alarmdata, Alldata, editPrescription } from "@/types";
 
 
 export const AppSlice = createApi({
@@ -43,7 +43,8 @@ export const AppSlice = createApi({
       }),
       invalidatesTags: ['prescription'],
     }),
-    editPrescription: builder.mutation({
+    // the type of th builder.mttatuib will be first one will be the types of response and second one will be th type of payload
+    editPrescription: builder.mutation<Presc, editPrescription>({
       query: ({ id, data }) => ({
         url: `/api/HealthData/${id}`, // Change this to the appropriate endpoint
         method: 'PATCH', // Use PUT method for updating

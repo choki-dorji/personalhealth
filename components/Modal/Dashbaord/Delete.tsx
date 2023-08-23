@@ -20,7 +20,7 @@ const Delete: React.FC<PrescriptionModalContentProps> = ({
   return (
     <>
       <ModalContent>
-        {(onClose: void) => (
+        {(onClose: any) => (
           <>
             <ModalHeader className="flex flex-col gap-1">
               Delete Alarm

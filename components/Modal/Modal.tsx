@@ -17,7 +17,7 @@ const ModalDelete: React.FC<PrescriptionModalContentProps> = ({ onDelete }) => {
   return (
     <>
       <ModalContent>
-        {(onClose: void) => (
+        {(onClose: any) => (
           <>
             <ModalHeader className="flex flex-col gap-1">
               Delete Prescription

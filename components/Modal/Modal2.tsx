@@ -22,7 +22,7 @@ export default function Modal2() {
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
         <ModalContent>
-          {(onClose: void) => (
+          {(onClose: any) => (
             <>
               <ModalHeader className="flex flex-col gap-1">Log in</ModalHeader>
               <ModalBody>

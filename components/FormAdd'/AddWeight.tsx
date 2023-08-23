@@ -21,10 +21,10 @@ function AddWeight() {
 
   const [postBMi] = usePostBMIMutation();
 
-  const required = (value: any): string | undefined =>
+  const required = (value: number): string | undefined =>
     value ? undefined : "It is required fields";
 
-  const submithandler = async (values: any) => {
+  const submithandler = async (values: values) => {
     await postBMi({
       Height: values.height,
       weight: values.weight,

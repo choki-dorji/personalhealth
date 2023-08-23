@@ -39,7 +39,7 @@ function DashModal() {
 
   return (
     <ModalContent>
-      {(onClose: void) => (
+      {(onClose: any) => (
         <>
           <form onSubmit={handleCreate}>
             <ModalHeader className="flex flex-col gap-1">Add Alarm</ModalHeader>
