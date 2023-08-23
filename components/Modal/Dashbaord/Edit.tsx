@@ -39,7 +39,7 @@ const Edit: React.FC<EditModalProps> = ({ id, onedit }) => {
 
   return (
     <ModalContent>
-      {(onClose: void) => (
+      {(onClose: any) => (
         <>
           <ToastContainer />
           <ModalHeader className="flex flex-col gap-1">
