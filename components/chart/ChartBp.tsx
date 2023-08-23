@@ -3,9 +3,12 @@ import Chart from "chart.js/auto";
 
 interface Data {
   data: [
-    month: string,
-    high: [value: number, date: string],
-    low: [value: number, date: string]
+    user: string,
+    data: [
+      month: string,
+      high: [value: number, date: string],
+      low: [value: number, date: string]
+    ]
   ];
 }
 interface ChartData {

@@ -9,9 +9,6 @@ import { usePostPrescriptionMutation } from "@/store/medicinereducer";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch } from "react-redux";
-import { getItem } from "@/store/reducer";
-import { useSession } from "next-auth/react";
 import { useGetItemOnSessionChange } from "@/utils/islogin";
 
 function Health() {

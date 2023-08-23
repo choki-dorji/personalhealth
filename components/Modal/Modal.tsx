@@ -10,14 +10,10 @@ import {
 } from "@nextui-org/react";
 
 interface PrescriptionModalContentProps {
-  onClose: () => any;
   onDelete: () => void;
 }
 
-const ModalDelete: React.FC<PrescriptionModalContentProps> = ({
-  onClose,
-  onDelete,
-}) => {
+const ModalDelete: React.FC<PrescriptionModalContentProps> = ({ onDelete }) => {
   return (
     <>
       <ModalContent>

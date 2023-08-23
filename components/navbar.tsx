@@ -15,20 +15,15 @@ import {
 } from "@/store/firebase";
 
 export const Navbar = () => {
-  const dispatch = useDispatch();
   const { data: session, status } = useSession();
   const { data: profile, isLoading, error } = useGetFireDataQuery();
   const iduser = LoginUserProfile(profile, session?.user?.email);
-  const [edit, { isLoading: isEditing, isSuccess, isError }] =
-    useEditFireMutation();
 
   const {
     data: data1,
     isLoading: load,
     error: errorr,
   } = useGetFireDataidQuery(iduser && iduser);
-
-  dispatch(getAuthData(data1));
 
   return (
     <NextUINavbar maxWidth="xl" position="sticky">

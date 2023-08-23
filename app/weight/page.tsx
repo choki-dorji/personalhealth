@@ -8,13 +8,9 @@ import { useGetBMIQuery } from "@/store/bp";
 import Paginations from "@/components/Pagination/pagination";
 import { useGetBMIDataQuery } from "@/store/bp";
 import BMIGraph from "@/components/chart/GraphBMI";
+import { BMIitem } from "@/types";
 import { useGetItemOnSessionChange } from "@/utils/islogin";
-
-interface BMIitem {
-  _id: string;
-  Height: number;
-  weight: number;
-}
+import Loader from "@/components/Loader/load";
 
 function BMI() {
   useGetItemOnSessionChange();
@@ -28,7 +24,11 @@ function BMI() {
   } = useGetBMIDataQuery();
 
   if (isLoading || loader) {
-    return <p>Loading</p>;
+    return (
+      <div className="flex justify-center">
+        <Loader />
+      </div>
+    );
   }
   if (error || bloodError) {
     return <p>error</p>;
@@ -37,12 +37,12 @@ function BMI() {
     (data: any) => data.user === logginuser.user?.user?.email
   );
 
-  const forauth =
-    data1 &&
-    data1.data.filter((data) => data.user === logginuser.user?.user?.email);
+  const forauth = data1?.data?.filter(
+    (data) => data.user === logginuser.user?.user?.email
+  );
 
   const pageSize = 5;
-  const totalitems = forauth && forauth.length;
+  const totalitems = forauth?.length;
   const totalPage = totalitems && Math.ceil(totalitems / pageSize);
 
   const handleChange = (newPage: number) => {
@@ -102,7 +102,7 @@ function BMI() {
         <Paginations
           initialPage={currentPage}
           pageSize={pageSize}
-          total={totalPage}
+          total={totalPage ?? 0}
           onChange={(page: number) => handleChange(page)}
         />
       </div>

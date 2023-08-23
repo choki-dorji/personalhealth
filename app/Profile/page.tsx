@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import styles from "./profile.module.css";
 import { useSession } from "next-auth/react";
 import { LoginUserProfile } from "@/utils/util";
+import Loader from "@/components/Loader/load";
 import {
   useGetFireDataQuery,
   useEditFireMutation,
@@ -22,8 +23,6 @@ import { ref, uploadBytes } from "firebase/storage";
 import { storage } from "@/Firebase/setup";
 import { Imagetype } from "@/types";
 import { useGetItemOnSessionChange } from "@/utils/islogin";
-import { useSelector } from "react-redux";
-import { Auth } from "@/store/Authenticated";
 
 const link =
   "https://firebasestorage.googleapis.com/v0/b/projectauthbackend.appspot.com/o/images";
@@ -38,8 +37,6 @@ const Profile = () => {
   const address = useRef("");
   const dob = useRef("");
 
-  // const statadata = useSelector((state: Auth) => state.auth);
-  // console.log(statadata);
   const { data: session, status } = useSession();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { data: profile, isLoading, error } = useGetFireDataQuery();
@@ -54,7 +51,11 @@ const Profile = () => {
   } = useGetFireDataidQuery(iduser && iduser);
 
   if (isLoading || load) {
-    return <p>Loading</p>;
+    return (
+      <div className="flex justify-center">
+        <Loader />
+      </div>
+    );
   }
   // console.log(profile);
 
@@ -65,7 +66,6 @@ const Profile = () => {
 
   const edithandler = (onClose: void) => {
     const imageref = ref(storage, `images/${image?.name}`);
-    // console.log(image);
 
     uploadBytes(imageref, image)
       .then(() => {

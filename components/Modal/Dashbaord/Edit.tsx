@@ -13,7 +13,6 @@ import "react-toastify/dist/ReactToastify.css";
 interface EditModalProps {
   id: string;
   onedit: () => void;
-  onClose: () => void;
 }
 
 import {
@@ -27,7 +26,7 @@ interface EditedDataResponse {
   };
 }
 
-const Edit: React.FC<EditModalProps> = ({ id, onedit, onClose }) => {
+const Edit: React.FC<EditModalProps> = ({ id, onedit }) => {
   const { data, isLoading } = useGetDetailPrescriptionQuery(id);
   const [editPrescription, { isLoading: isEditing, isSuccess, isError }] =
     useEditPrescriptionMutation();
@@ -40,49 +39,53 @@ const Edit: React.FC<EditModalProps> = ({ id, onedit, onClose }) => {
 
   return (
     <ModalContent>
-      <ToastContainer />
-      <ModalHeader className="flex flex-col gap-1">
-        Edit Prescription
-      </ModalHeader>
-      <ModalBody>
-        <Input
-          autoFocus
-          label="Diagnosis"
-          variant="bordered"
-          value={diagnosis}
-          onChange={(e) => setDiagnosis(e.target.value)}
-        />
-        <Input
-          label="Description"
-          variant="bordered"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <Input
-          label="Medicine"
-          variant="bordered"
-          value={medicine}
-          onChange={(e) => setMedicine(e.target.value)}
-        />
-        <Input
-          label="Doctor's Message"
-          variant="bordered"
-          value={otherInformation}
-          onChange={(e) => setOtherInformation(e.target.value)}
-        />
-      </ModalBody>
-      <ModalFooter>
-        <Button color="danger" variant="flat" onClick={onClose}>
-          Close
-        </Button>
-        <Button
-          color="primary"
-          //   onClick={handleUpdateClick}
-          disabled={isEditing}
-        >
-          {isEditing ? "Updating..." : "Update"}
-        </Button>
-      </ModalFooter>
+      {(onClose: void) => (
+        <>
+          <ToastContainer />
+          <ModalHeader className="flex flex-col gap-1">
+            Edit Prescription
+          </ModalHeader>
+          <ModalBody>
+            <Input
+              autoFocus
+              label="Diagnosis"
+              variant="bordered"
+              value={diagnosis}
+              onChange={(e) => setDiagnosis(e.target.value)}
+            />
+            <Input
+              label="Description"
+              variant="bordered"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+            <Input
+              label="Medicine"
+              variant="bordered"
+              value={medicine}
+              onChange={(e) => setMedicine(e.target.value)}
+            />
+            <Input
+              label="Doctor's Message"
+              variant="bordered"
+              value={otherInformation}
+              onChange={(e) => setOtherInformation(e.target.value)}
+            />
+          </ModalBody>
+          <ModalFooter>
+            <Button color="danger" variant="flat" onClick={onClose}>
+              Close
+            </Button>
+            <Button
+              color="primary"
+              //   onClick={handleUpdateClick}
+              disabled={isEditing}
+            >
+              {isEditing ? "Updating..." : "Update"}
+            </Button>
+          </ModalFooter>
+        </>
+      )}
     </ModalContent>
   );
 };
