@@ -27,6 +27,10 @@ import { useGetItemOnSessionChange } from "@/utils/islogin";
 const link =
   "https://firebasestorage.googleapis.com/v0/b/projectauthbackend.appspot.com/o/images";
 
+interface Image {
+  name: string;
+}
+
 const Profile = () => {
   useGetItemOnSessionChange();
   const name = useRef("");
@@ -61,11 +65,17 @@ const Profile = () => {
 
   const handleImageChange = (e: any) => {
     const file = e.target.files[0];
+    console.log(file);
     setImage(file);
   };
 
+  console.log(image);
   const edithandler = (onClose: void) => {
-    const imageref = ref(storage, `images/${image?.name}`);
+    // const imageref = ref(storage, `images/${image?.name}`);
+    const imageref = ref(
+      storage,
+      `images/${image instanceof File ? image.name : "defaultName"}`
+    );
 
     uploadBytes(imageref, image)
       .then(() => {
@@ -78,7 +88,7 @@ const Profile = () => {
       data: {
         name: name.current,
         address: address.current,
-        image: image.name,
+        image: image?.name ?? image,
       },
     })
       .then((r) => console.log("updated"))
