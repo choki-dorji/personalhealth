@@ -10,8 +10,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 interface values {
-  height: number;
-  weight: number;
+  height: string | number | readonly string[] | undefined;
+  weight: string | number | readonly string[] | undefined;
 }
 
 function AddWeight() {
@@ -21,10 +21,10 @@ function AddWeight() {
 
   const [postBMi] = usePostBMIMutation();
 
-  const required = (value: values): string | undefined =>
+  const required = (value: any): string | undefined =>
     value ? undefined : "It is required fields";
 
-  const submithandler = async (values: values) => {
+  const submithandler = async (values: any) => {
     await postBMi({
       Height: values.height,
       weight: values.weight,
@@ -35,7 +35,7 @@ function AddWeight() {
   return (
     <>
       <Form onSubmit={submithandler}>
-        {({ handleSubmit, values, submitting }) => (
+        {({ handleSubmit, submitting }) => (
           <form onSubmit={handleSubmit}>
             <Field
               name="height"

@@ -1,5 +1,4 @@
 "use client";
-
 import style from "./page.module.css";
 import Card1 from "@/components/Cards/Card";
 import ScatterPlot from "@/components/chart/chart";
@@ -31,7 +30,7 @@ function Home() {
   // const { data: session, status } = useSession({
   //   required: true,
   // });
-  console.log(user);
+  // console.log(user);
 
   const {
     data: data1,
