@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET() {
   await connectMongooDB();
 
-  function formatDate(inputDate: string) {
+  function formatDate(inputDate: Date) {
     const date = new Date(inputDate);
     const day = date.getUTCDate();
     const month = date.toLocaleString('default', { month: 'long' });
@@ -18,11 +18,12 @@ export async function GET() {
   // let allData: string [];
   const response = await BloodPressure.find();
 
-  const groupedData = {}; // Object to hold grouped data
+  const groupedData : any = {}; // Object to hold grouped data
 
   response.forEach(data => {
     const user = data.user;
     const date = new Date(data.date);
+    
     const formattedDate = formatDate(date);
 
     if (!groupedData[user]) {
