@@ -1,3 +1,4 @@
+"use client";
 import { Navbar as NextUINavbar, NavbarContent } from "@nextui-org/navbar";
 import { useSession } from "next-auth/react";
 import Logo from "./NavbarComponent/Logo";
