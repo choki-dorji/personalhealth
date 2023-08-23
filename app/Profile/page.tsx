@@ -68,7 +68,7 @@ const Profile = () => {
   };
 
   console.log(image);
-  const edithandler = (onClose: void) => {
+  const edithandler = () => {
     // const imageref = ref(storage, `images/${image?.name}`);
     const imageref = ref(
       storage,
@@ -92,8 +92,7 @@ const Profile = () => {
     })
       .then((r) => console.log("updated"))
       .catch((err) => console.log(err));
-
-    onClose();
+    return true;
   };
 
   const imagelink = `${link}%2F${data1.image}?alt=media`;
@@ -136,10 +135,12 @@ const Profile = () => {
         </Button>
         <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
           <ModalContent>
-            {(onClose: void) => (
+            {(onClose: any) => (
               <>
                 <ModalHeader className="flex flex-col gap-1">
-                  Add User Details
+                  {data1.name && data1.email && data1.address
+                    ? "Edit User Details"
+                    : "Add User Details"}
                 </ModalHeader>
                 <ModalBody>
                   <Input
@@ -160,7 +161,17 @@ const Profile = () => {
                   <Button color="danger" variant="light" onClick={onClose}>
                     Close
                   </Button>
-                  <Button color="primary" onClick={() => edithandler(onClose)}>
+                  <Button
+                    color="primary"
+                    onClick={async () => {
+                      // Call the edithandler function here
+                      const editSuccessful = await edithandler();
+                      // console.log(editSuccessful);
+                      if (editSuccessful) {
+                        onClose(); // Close the modal if editing was successful
+                      }
+                    }}
+                  >
                     {data1.name && data1.email && data1.address
                       ? "Edit Details"
                       : "Add Details"}
