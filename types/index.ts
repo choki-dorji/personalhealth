@@ -59,8 +59,10 @@ export interface BpData{
 }
 
 export interface bloodData{
+  user: string,
   Healthdata: [
     month: string,
+    
     high: [
       value: number,
       date: string,
@@ -96,7 +98,7 @@ export interface UserDatabase {
 }
 
 export interface User{
-  user?:{
+  user:{
     name?: string | null | undefined;
     email?: string | null | undefined;
     image?: string | null | undefined;

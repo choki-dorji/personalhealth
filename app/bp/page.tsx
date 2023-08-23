@@ -21,7 +21,9 @@ interface items {
 
 function BP() {
   useGetItemOnSessionChange();
-  const userloggedin = useSelector((state: User | loginuser) => state.user);
+  // const userloggedin = useSelector((state: User | loginuser) => state.user);
+  const userloggedin = useSelector((state: any) => state.user);
+
   const [currentPage, setCurrentPage] = useState(1);
   const { data: data1, isLoading, error } = useGetBpQuery();
   const {
@@ -53,7 +55,7 @@ function BP() {
   const loggedinuser =
     data1 &&
     data1.Healthdata.filter(
-      (user) => user.user === userloggedin?.user.user.email
+      (user: any) => user.user === userloggedin?.user.user.email
     );
   console.log(loggedinuser);
 
