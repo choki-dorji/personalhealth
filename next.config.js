@@ -11,5 +11,4 @@ module.exports = {
       },
     ],
   },
-  output: "export"
 };
