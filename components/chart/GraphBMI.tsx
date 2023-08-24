@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
-import { BMIData } from "@/store/bp";
+import { BMIData } from "@/types";
 
-const BMIGraph = (props: BMIData) => {
+const BMIGraph = (props: any) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const chartRef = useRef<Chart | null>(null);
+  const chartRef = useRef<any | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -15,12 +15,15 @@ const BMIGraph = (props: BMIData) => {
         chartRef.current.destroy();
       }
 
-      const ctx = canvas.getContext("2d");
+      const ctx: any = canvas.getContext("2d");
       console.log(props);
 
       const labels =
-        props.Healthdata && props.Healthdata.map(({ date }) => date);
-      const values = props.Healthdata && props.Healthdata.map(({ bmi }) => bmi);
+        props.Healthdata &&
+        props.Healthdata.map(({ date }: { date: any }) => date);
+      const values =
+        props.Healthdata &&
+        props.Healthdata.map(({ bmi }: { bmi: any }) => bmi);
 
       chartRef.current = new Chart(ctx, {
         type: "line",

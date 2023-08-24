@@ -6,7 +6,7 @@ import { useGetAllPrescriptionQuery } from "@/store/medicinereducer";
 export default function ScatterPlot() {
   const { data: data1, isLoading, error } = useGetAllPrescriptionQuery();
   const userdata = useSelector((state: any) => state.user);
-  const canvasEl = useRef(null);
+  const canvasEl = useRef<HTMLCanvasElement | null>(null);
 
   const colors = {
     purple: {
@@ -24,29 +24,38 @@ export default function ScatterPlot() {
   console.log(data1);
 
   useEffect(() => {
-    const ctx = canvasEl.current?.getContext("2d");
-
-    if (isLoading) {
-      // Return early if data is still loading
-      return;
-    }
+    const ctx: any = canvasEl.current?.getContext("2d");
 
     const specificuser = data1?.Healthdata.filter(
       (d: any) => d.user === userdata.user?.user?.email
     );
     console.log(specificuser);
 
-    const labels = specificuser.map((entry) => entry.month);
+    const aggregatedData: any = {};
+
+    specificuser?.forEach((entry) => {
+      const { user, month, count } = entry;
+      if (aggregatedData[month]) {
+        aggregatedData[month].count += count;
+      } else {
+        aggregatedData[month] = { user, month, count };
+      }
+    });
+
+    const result = Object.values(aggregatedData);
+    console.log(result);
+
+    const labels = result.map((entry: any) => entry.month);
     console.log(labels);
 
-    const counts = specificuser.map((entry) => entry.count);
+    const counts = result.map((entry: any) => entry.count);
     console.log(counts);
     // order the months
 
-    const gradient = ctx.createLinearGradient(0, 16, 0, 600);
-    gradient.addColorStop(0, colors.purple.half);
-    gradient.addColorStop(0.65, colors.purple.quarter);
-    gradient.addColorStop(1, colors.purple.zero);
+    const gradient = ctx?.createLinearGradient(0, 16, 0, 600);
+    gradient?.addColorStop(0, colors.purple.half);
+    gradient?.addColorStop(0.65, colors.purple.quarter);
+    gradient?.addColorStop(1, colors.purple.zero);
 
     const data = {
       labels: labels,
@@ -64,7 +73,7 @@ export default function ScatterPlot() {
         },
       ],
     };
-    const config = {
+    const config: any = {
       type: "line",
       data: data,
     };
@@ -79,8 +88,13 @@ export default function ScatterPlot() {
 
   return (
     <div className="App">
-      <span>Chart.js Demo</span>
-      <canvas id="myChart" ref={canvasEl} height="100" />
+      {isLoading ? (
+        <div className="flex justify-center">
+          <p>Fetching Data ....</p>
+        </div>
+      ) : (
+        <canvas id="myChart" ref={canvasEl} height="100" />
+      )}
     </div>
   );
 }

@@ -28,8 +28,9 @@ export interface Alarm {
   notification:string
 }
 export interface Alarmdata{
-  alarm: Alarm[] | undefined
+  alarm?: Alarm[] | undefined
   user: string
+  isLoading?: boolean
 }
 
 export interface Bdata {
@@ -69,7 +70,7 @@ export interface bloodData{
 
 export interface PaginationProps {
   initialPage: number;
-  pageSize: number;
+  pageSize?: number;
   total: number;
   onChange: (page: number) => void;
 }

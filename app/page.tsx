@@ -50,13 +50,13 @@ function Home() {
     error: isError,
   } = useGetBMIQuery();
 
-  if (loading1 || bloodloading || Bmiloading) {
-    return (
-      <div>
-        <Load />
-      </div>
-    );
-  }
+  // if (loading1) {
+  //   return (
+  //     <div>
+  //       <Load />
+  //     </div>
+  //   );
+  // }
 
   if (error1 || bperror || isError) {
     return <div>Error: </div>;
@@ -80,60 +80,73 @@ function Home() {
       <div className={style.container1}>
         <div>
           <Card1
-            title={`Hello!!! ${
-              user && user.user?.user?.name
-                ? user.user?.user?.name
-                : user.user?.user?.email
-            }`}
-            description="Have a great day!"
+            title={
+              user.user?.user
+                ? `Hello!!! ${
+                    user && user.user?.user?.name
+                      ? user.user?.user?.name
+                      : user.user?.user?.email
+                  }`
+                : "Loading ..."
+            }
+            description={user.user?.user ? "Have a nice day!" : "Loading ..."}
             description1=" "
           />
         </div>
         <div className={style.container3}>
-          <Card1
-            title={
-              loginuser.length > 0
-                ? `BMI = ${loginuser[loginuser.length - 1].BMI} `
-                : "no data"
-            }
-            description={
-              loginuser && loginuser.length > 0
-                ? `weight = ${
-                    loginuser[loginuser.length - 1].weight
-                  } , height=${loginuser[loginuser.length - 1].Height}`
-                : "Add data to display"
-            }
-            content={
-              loginuser && loginuser.length > 0
-                ? loginuser[loginuser.length - 1].BMI > 24
-                  ? "You are over Weight"
-                  : loginuser[loginuser.length - 1].BMI < 18
-                  ? "You are Under Weight"
-                  : "You are Normal"
-                : ""
-            }
-          />
-          <Card1
-            title="Blood Pressure"
-            description={
-              specificuser && specificuser.length > 0
-                ? `${specificuser[specificuser.length - 1].highPressure}/${
-                    specificuser[specificuser.length - 1].lowerPressure
-                  } mmHg`
-                : "Add data to se display"
-            }
-            content={
-              specificuser && specificuser.length > 0
-                ? specificuser[specificuser.length - 1].highPressure > 120
-                  ? "High BP"
-                  : specificuser &&
-                    specificuser[specificuser.length - 1].highPressure < 80
-                  ? "Low BP"
-                  : "Normal BP"
-                : "no data"
-            }
-            footer={`${date}`}
-          />
+          {Bmiloading ? (
+            <Card1 title="Loading ..." description="Loading ..." content="" />
+          ) : (
+            <Card1
+              title={
+                loginuser.length > 0
+                  ? `BMI = ${loginuser[loginuser.length - 1].BMI} `
+                  : "no data"
+              }
+              description={
+                loginuser && loginuser.length > 0
+                  ? `weight = ${
+                      loginuser[loginuser.length - 1].weight
+                    } , height=${loginuser[loginuser.length - 1].Height}`
+                  : "Add data to display"
+              }
+              content={
+                loginuser && loginuser.length > 0
+                  ? loginuser[loginuser.length - 1].BMI > 24
+                    ? "You are over Weight"
+                    : loginuser[loginuser.length - 1].BMI < 18
+                    ? "You are Under Weight"
+                    : "You are Normal"
+                  : ""
+              }
+            />
+          )}
+
+          {!bloodloading ? (
+            <Card1
+              title="Blood Pressure"
+              description={
+                specificuser && specificuser.length > 0
+                  ? `${specificuser[specificuser.length - 1].highPressure}/${
+                      specificuser[specificuser.length - 1].lowerPressure
+                    } mmHg`
+                  : "Add data to se display"
+              }
+              content={
+                specificuser && specificuser.length > 0
+                  ? specificuser[specificuser.length - 1].highPressure > 120
+                    ? "High BP"
+                    : specificuser &&
+                      specificuser[specificuser.length - 1].highPressure < 80
+                    ? "Low BP"
+                    : "Normal BP"
+                  : "no data"
+              }
+              footer={`${date}`}
+            />
+          ) : (
+            <Card1 title="Loading ..." description="Loading ..." content="" />
+          )}
         </div>
       </div>
       <div className={style.container}>
@@ -143,12 +156,26 @@ function Home() {
         </div>
         <div className={style.fruits}>
           <div className={style.mango}>
-            <Card2 alarm={data1 && data1.alarm} user={user.user?.user?.email} />
+            {loading1 ? (
+              <Card2 isLoading={true} user={user.user?.user?.email} />
+            ) : (
+              <Card2
+                alarm={data1 && data1.alarm}
+                user={user.user?.user?.email}
+              />
+            )}
           </div>
-          <div className={style.floatingButton} onClick={onOpen}>
-            Add Alarm{""}
-            <FontAwesomeIcon icon={faCalendar} />
-          </div>
+          {!loading1 ? (
+            <div className={style.floatingButton} onClick={onOpen}>
+              Add Alarm{""}
+              <FontAwesomeIcon icon={faCalendar} />
+            </div>
+          ) : (
+            <div className={style.floatingButton} onClick={onOpen}>
+              Add Alarm{""}
+            </div>
+          )}
+
           {/* should be in another file  */}
           <Modal
             isOpen={isOpen}

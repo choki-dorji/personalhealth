@@ -1,7 +1,7 @@
 import React from "react";
 import { Scatter } from "react-chartjs-2";
 
-const ScatterGraph = ({ data }) => {
+const ScatterGraph = ({ data }: { data: any }) => {
   return (
     <Scatter
       data={data}
