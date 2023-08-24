@@ -23,7 +23,7 @@ function Search() {
           type="text"
           label="Search Prescription"
           value={value}
-          onChange={(e: ChangeEvent) => setValue(e.target.value)}
+          onChange={(e: any) => setValue(e.target.value)}
           //   className="mr-2 h-[2rem]" // Margin and equal height
         />
 

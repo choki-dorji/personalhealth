@@ -69,7 +69,7 @@ export interface bloodData{
 
 export interface PaginationProps {
   initialPage: number;
-  pageSize: number;
+  pageSize?: number;
   total: number;
   onChange: (page: number) => void;
 }

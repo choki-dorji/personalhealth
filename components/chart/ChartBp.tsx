@@ -43,7 +43,7 @@ const PressureBarGraph = (props: any) => {
     const canvas = canvasRef.current;
 
     if (canvas) {
-      const ctx = canvas.getContext("2d");
+      const ctx: any = canvas.getContext("2d");
 
       props.data.forEach((userEntry: any) => {
         userEntry.data.forEach((dataEntry: any) => {

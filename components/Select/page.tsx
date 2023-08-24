@@ -65,7 +65,7 @@ import store from "@/store/store";
 
 export default function Select() {
   const dispatch = useDispatch();
-  const [selectedKeys, setSelectedKeys] = useState();
+  const [selectedKeys, setSelectedKeys] = useState<any>();
 
   const timeRanges = [
     { label: "All", range: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
