@@ -6,7 +6,6 @@ export default function Paginations(props: PaginationProps) {
   return (
     <Pagination
       total={props.total}
-      // pageSize={props.pageSize}
       initialPage={props.initialPage}
       onChange={props.onChange}
     />

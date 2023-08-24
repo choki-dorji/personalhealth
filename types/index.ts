@@ -28,8 +28,9 @@ export interface Alarm {
   notification:string
 }
 export interface Alarmdata{
-  alarm: Alarm[] | undefined
+  alarm?: Alarm[] | undefined
   user: string
+  isLoading?: boolean
 }
 
 export interface Bdata {

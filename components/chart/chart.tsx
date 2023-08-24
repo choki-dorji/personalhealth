@@ -26,11 +26,6 @@ export default function ScatterPlot() {
   useEffect(() => {
     const ctx: any = canvasEl.current?.getContext("2d");
 
-    if (isLoading) {
-      // Return early if data is still loading
-      return;
-    }
-
     const specificuser = data1?.Healthdata.filter(
       (d: any) => d.user === userdata.user?.user?.email
     );
@@ -93,8 +88,13 @@ export default function ScatterPlot() {
 
   return (
     <div className="App">
-      <span>Chart.js Demo</span>
-      <canvas id="myChart" ref={canvasEl} height="100" />
+      {isLoading ? (
+        <div className="flex justify-center">
+          <p>Fetching Data ....</p>
+        </div>
+      ) : (
+        <canvas id="myChart" ref={canvasEl} height="100" />
+      )}
     </div>
   );
 }
