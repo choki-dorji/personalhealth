@@ -5,10 +5,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import axios from "axios";
-const domain = process.env.NEXT_DOMAIN
-  ? process.env.NEXT_DOMAIN
-  : "https://darling-jelly-e23b0a.netlify.app/";
+
+const domain = process.env.NEXT_PUBLIC_NEXT_DOMAIN;
+
 const Register = () => {
+  console.log(process.env.NEXT_PUBLIC_MONGO_URI);
   console.log(domain);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

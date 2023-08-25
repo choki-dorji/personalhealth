@@ -3,7 +3,7 @@ import { BpData, Bmidata, BMIData, bloodData } from "@/types";
 
 export const BloodSlice = createApi({
   reducerPath: "BloodSlice",
-  baseQuery: fetchBaseQuery({ baseUrl:  process.env.NEXT_DOMAIN }),
+  baseQuery: fetchBaseQuery({ baseUrl:  process.env.NEXT_PUBLIC_NEXT_DOMAIN }),
   tagTypes: ['bp', "weight"],
   endpoints: (builder) => ({
     getBp: builder.query<BpData, void>({

@@ -5,7 +5,7 @@ import { Alarmdata, Alldata, editPrescription } from "@/types";
 
 export const AppSlice = createApi({
   reducerPath: "AppSlice",
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_DOMAIN }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_NEXT_DOMAIN }),
   tagTypes: ['alarm', "prescription"],
   endpoints: (builder) => ({
     getAlarm: builder.query<Alarmdata, void>({
