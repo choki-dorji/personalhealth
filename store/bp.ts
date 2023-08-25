@@ -3,11 +3,11 @@ import { BpData, Bmidata, BMIData, bloodData } from "@/types";
 
 export const BloodSlice = createApi({
   reducerPath: "BloodSlice",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000/" }),
+  baseQuery: fetchBaseQuery({ baseUrl:  process.env.DOMAIN }),
   tagTypes: ['bp', "weight"],
   endpoints: (builder) => ({
     getBp: builder.query<BpData, void>({
-      query: () => "api/bloobpressure",
+      query: () => "/api/bloobpressure",
       providesTags: ["bp"]
     }),
     postBp: builder.mutation({
@@ -20,7 +20,7 @@ export const BloodSlice = createApi({
           invalidatesTags: ["bp"]
     }),
     getBMI: builder.query<Bmidata, void>({
-      query: () => "api/weights",
+      query: () => "/api/weights",
       providesTags:["weight"]
     }),
     postBMI: builder.mutation({
@@ -33,7 +33,7 @@ export const BloodSlice = createApi({
 
   }),
   getBlooddata: builder.query<bloodData, void>({
-    query: () => "api/Graph/bloodpressure",
+    query: () => "/api/Graph/bloodpressure",
     providesTags: ["bp"]
   }),
   getBMIData: builder.query<BMIData, void>({
