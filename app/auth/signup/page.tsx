@@ -14,7 +14,7 @@ const Register = () => {
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3000/api/register", {
+      .post(`${process.env.DOMAIN}/api/register`, {
         email: email,
         password: password,
       })

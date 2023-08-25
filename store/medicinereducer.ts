@@ -5,11 +5,11 @@ import { Alarmdata, Alldata, editPrescription } from "@/types";
 
 export const AppSlice = createApi({
   reducerPath: "AppSlice",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000/" }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.DOMAIN }),
   tagTypes: ['alarm', "prescription"],
   endpoints: (builder) => ({
     getAlarm: builder.query<Alarmdata, void>({
-      query: () => "api/alarm",
+      query: () => "/api/alarm",
       providesTags: ['alarm']
     }),
     postAlarm: builder.mutation({
@@ -21,7 +21,7 @@ export const AppSlice = createApi({
           invalidatesTags: ['alarm']
     }),
     getPrescription: builder.query<Prescription, void>({
-      query: () => "api/HealthData",
+      query: () => "/api/HealthData",
       providesTags: ['prescription']
     }),
     postPrescription: builder.mutation({
@@ -33,7 +33,7 @@ export const AppSlice = createApi({
           invalidatesTags: ['prescription']
     }),
     getDetailPrescription : builder.query({
-      query: (id) => `api/HealthData/${id}`,
+      query: (id) => `/api/HealthData/${id}`,
       providesTags: ['prescription']
     }),
     deletePrescription: builder.mutation<Presc, string>({
@@ -54,7 +54,7 @@ export const AppSlice = createApi({
       invalidatesTags: ['prescription'],
     }),
     getAllPrescription : builder.query<Alldata, void>({
-      query: () => `api/HealthData/all`,
+      query: () => `/api/HealthData/all`,
       providesTags: ['prescription']
     }),
     deleteAlarm : builder.mutation({
