@@ -5,8 +5,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 import axios from "axios";
-
+const domain = process.env.NEXT_DOMAIN
+  ? process.env.NEXT_DOMAIN
+  : "https://darling-jelly-e23b0a.netlify.app/";
 const Register = () => {
+  console.log(domain);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showAlert, setAlert] = useState(false);
@@ -14,7 +17,7 @@ const Register = () => {
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
     axios
-      .post(`${process.env.DOMAIN}/api/register`, {
+      .post(`${domain}api/register`, {
         email: email,
         password: password,
       })
@@ -25,15 +28,19 @@ const Register = () => {
       })
       .catch((error) => {
         // Handle the error here
-        toast.error("User already exist", {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        console.log(error);
+        toast.error(
+          error.response?.data?.error?.code || "User already created",
+          {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          }
+        );
       });
   };
 
