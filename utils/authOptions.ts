@@ -10,7 +10,7 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { App1 } from "@/Firebase/setup";
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   secret: process.env.AUTH_SECRET,
   providers: [
     Credentials({
@@ -19,7 +19,8 @@ export const authOptions = {
         email: { label: "email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
+      // @ts-ignore
+      async authorize(credentials: any, req: any) {
         const auth = getAuth(App1);
         // console.log("dshbcjhsdbjhbas")
         try {
@@ -34,14 +35,17 @@ export const authOptions = {
             const user = userCredential.user;
             console.log(user);
 
-            return user;
+            return Promise.resolve(user);
           }
-          // console.log("sncjasdkjbajsdndbvjabs")
-          return null;
+        
+          return Promise.resolve(null);
         } catch (error) {
           console.log("sncjasdkjbajsdndbv", error);
+          // throw new Error({error: error})
+          return Promise.reject(error);
           // return NextResponse.json({error: "Incorrect Email or password" }, {status: 500})
-          return { error: "Incorrect Email or password", status: 500 };
+          
+          // return Promise.resolve({ error: "Incorrect Email or password", status: 500 })
         }
       },
       //sign in

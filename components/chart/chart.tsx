@@ -1,9 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Chart from "chart.js/auto";
 import { useSelector } from "react-redux";
 import { useGetAllPrescriptionQuery } from "@/store/medicinereducer";
+import { onedata } from "@/types";
+import { Image } from "@nextui-org/react";
 
 export default function ScatterPlot() {
+  const [authuser, setAuthuser] = useState<onedata[] | undefined>();
   const { data: data1, isLoading, error } = useGetAllPrescriptionQuery();
   const userdata = useSelector((state: any) => state.user);
   const canvasEl = useRef<HTMLCanvasElement | null>(null);
@@ -30,6 +33,7 @@ export default function ScatterPlot() {
       (d: any) => d.user === userdata.user?.user?.email
     );
     console.log(specificuser);
+    setAuthuser(specificuser);
 
     const aggregatedData: any = {};
 
@@ -86,14 +90,25 @@ export default function ScatterPlot() {
     // });
   }, [isLoading]);
 
+  console.log(authuser);
+
   return (
     <div className="App">
       {isLoading ? (
         <div className="flex justify-center">
           <p>Fetching Data ....</p>
         </div>
-      ) : (
+      ) : authuser && authuser?.length > 0 ? (
         <canvas id="myChart" ref={canvasEl} height="100" />
+      ) : (
+        <div className="flex flex-col items-center">
+          <div>
+            <h1 className="text-4xl">No Data Available</h1>
+          </div>
+          <div className="mt-3">
+            <Image src="/nodata.jpg" alt="modata" height={200} width={200} />
+          </div>
+        </div>
       )}
     </div>
   );

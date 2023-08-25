@@ -1,9 +1,10 @@
 import axios from "axios";
 import { Bdata, Bmidata, Bp, BpData, User, Prescription, Presc, Alarm } from "@/types";
 
-export function Loginuserdata(data: (Bdata | Bp | Presc)[] | undefined, user:User) {
-    console.log(data);  
-    const userdata = data && data.filter((query: any) => query.user === user);
+export function Loginuserdata(data: Bdata[] | Bp[] | undefined | Presc[], user:User) {
+    console.log(user);
+    //@ts-ignore  
+    const userdata = data?.filter((query: any) => query.user === user);
     return userdata
 }
 

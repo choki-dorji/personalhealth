@@ -82,11 +82,7 @@ function Home() {
           <Card1
             title={
               user.user?.user
-                ? `Hello!!! ${
-                    user && user.user?.user?.name
-                      ? user.user?.user?.name
-                      : user.user?.user?.email
-                  }`
+                ? `Hello!!! ${user.user?.user?.email}`
                 : "Loading ..."
             }
             description={user.user?.user ? "Have a nice day!" : "Loading ..."}
