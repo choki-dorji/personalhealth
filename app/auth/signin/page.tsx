@@ -5,8 +5,12 @@ import { useRef } from "react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import styles from "./sign.module.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 
 function Signin() {
+  const router = useRouter();
   const email = useRef("");
   const password = useRef("");
 
@@ -14,9 +18,23 @@ function Signin() {
     const result = await signIn("credentials", {
       email: email.current,
       password: password.current,
-      redirect: true,
-      callbackUrl: "/",
+      redirect: false,
+      // callbackUrl: "/",
     });
+    console.log(result);
+    if (result?.error) {
+      return toast.error("Couldnot Login", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      router.push("/");
+    }
   };
 
   return (
@@ -44,6 +62,7 @@ function Signin() {
       <Link href="/auth/signup" className={styles.link}>
         Register
       </Link>
+      <ToastContainer />
     </>
   );
 }
