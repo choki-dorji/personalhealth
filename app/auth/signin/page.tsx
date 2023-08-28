@@ -25,7 +25,7 @@ function Signin() {
     if (result?.error === null) {
       router.push("/");
     } else if (result?.error !== "SessionRequired") {
-      return toast.error("Couldnot Login", {
+      return toast.error(result?.error ?? "Couldnot Login", {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
