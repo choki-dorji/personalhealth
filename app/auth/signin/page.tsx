@@ -22,7 +22,9 @@ function Signin() {
       // callbackUrl: "/",
     });
     console.log(result);
-    if (result?.error) {
+    if (result?.error === null) {
+      router.push("/");
+    } else if (result?.error !== "SessionRequired") {
       return toast.error("Couldnot Login", {
         position: "top-center",
         autoClose: 3000,

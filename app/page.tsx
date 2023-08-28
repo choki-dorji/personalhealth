@@ -21,15 +21,15 @@ import { useSession } from "next-auth/react";
 import { useGetItemOnSessionChange } from "@/utils/islogin";
 
 function Home() {
+  const { data: session, status } = useSession({
+    required: true,
+  });
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   // user data//////////
   useGetItemOnSessionChange();
   const user = useSelector((state: any) => state.user);
   //end userdata
-  // const { data: session, status } = useSession({
-  //   required: true,
-  // });
   // console.log(user);
 
   const {
@@ -50,14 +50,6 @@ function Home() {
     error: isError,
   } = useGetBMIQuery();
 
-  // if (loading1) {
-  //   return (
-  //     <div>
-  //       <Load />
-  //     </div>
-  //   );
-  // }
-
   if (error1 || bperror || isError) {
     return <div>Error: </div>;
   }
@@ -77,8 +69,10 @@ function Home() {
 
   return (
     <>
-      <div className={style.container1}>
-        <div>
+      <div
+        className={`flex sm: flex-row md:flex-row xl: flex-col lg:flex-col${style.container1} `}
+      >
+        <div className="sm:w-[100%] xs:w-[100%] md:w-[100%] md:mr-4 lg:mr-4 xl:mr-4 sm:mr-0 xs:mr-0">
           <Card1
             title={
               user.user?.user
@@ -89,68 +83,81 @@ function Home() {
             description1=" "
           />
         </div>
-        <div className={style.container3}>
-          {Bmiloading ? (
-            <Card1 title="Loading ..." description="Loading ..." content="" />
-          ) : (
-            <Card1
-              title={
-                loginuser.length > 0
-                  ? `BMI = ${loginuser[loginuser.length - 1].BMI} `
-                  : "no data"
-              }
-              description={
-                loginuser && loginuser.length > 0
-                  ? `weight = ${
-                      loginuser[loginuser.length - 1].weight
-                    } , height=${loginuser[loginuser.length - 1].Height}`
-                  : "Add data to display"
-              }
-              content={
-                loginuser && loginuser.length > 0
-                  ? loginuser[loginuser.length - 1].BMI > 24
-                    ? "You are over Weight"
-                    : loginuser[loginuser.length - 1].BMI < 18
-                    ? "You are Under Weight"
-                    : "You are Normal"
-                  : ""
-              }
-            />
-          )}
+        {/* one */}
+        <div
+          className={`flex flex-row ${style.container3} xs:top-4 sm:mt-4 md:mt-0 xl:mt-0 lg:mt-0`}
+        >
+          <div>
+            {/* onee */}
+            {Bmiloading ? (
+              <Card1 title="Loading ..." description="Loading ..." content="" />
+            ) : (
+              <Card1
+                title={
+                  loginuser.length > 0
+                    ? `BMI = ${loginuser[loginuser.length - 1].BMI} `
+                    : "no data"
+                }
+                description={
+                  loginuser && loginuser.length > 0
+                    ? `weight = ${
+                        loginuser[loginuser.length - 1].weight
+                      } , height=${loginuser[loginuser.length - 1].Height}`
+                    : "Add data to display"
+                }
+                content={
+                  loginuser && loginuser.length > 0
+                    ? loginuser[loginuser.length - 1].BMI > 24
+                      ? "You are over Weight"
+                      : loginuser[loginuser.length - 1].BMI < 18
+                      ? "You are Under Weight"
+                      : "You are Normal"
+                    : ""
+                }
+              />
+            )}
+          </div>
 
-          {!bloodloading ? (
-            <Card1
-              title="Blood Pressure"
-              description={
-                specificuser && specificuser.length > 0
-                  ? `${specificuser[specificuser.length - 1].highPressure}/${
-                      specificuser[specificuser.length - 1].lowerPressure
-                    } mmHg`
-                  : "Add data to se display"
-              }
-              content={
-                specificuser && specificuser.length > 0
-                  ? specificuser[specificuser.length - 1].highPressure > 120
-                    ? "High BP"
-                    : specificuser &&
-                      specificuser[specificuser.length - 1].highPressure < 80
-                    ? "Low BP"
-                    : "Normal BP"
-                  : "no data"
-              }
-              footer={`${date}`}
-            />
-          ) : (
-            <Card1 title="Loading ..." description="Loading ..." content="" />
-          )}
+          {/* another */}
+          <div>
+            {!bloodloading ? (
+              <Card1
+                title="Blood Pressure"
+                description={
+                  specificuser && specificuser.length > 0
+                    ? `${specificuser[specificuser.length - 1].highPressure}/${
+                        specificuser[specificuser.length - 1].lowerPressure
+                      } mmHg`
+                    : "Add data to display"
+                }
+                content={
+                  specificuser && specificuser.length > 0
+                    ? specificuser[specificuser.length - 1].highPressure > 120
+                      ? "High BP"
+                      : specificuser &&
+                        specificuser[specificuser.length - 1].highPressure < 80
+                      ? "Low BP"
+                      : "Normal BP"
+                    : "no data"
+                }
+                footer={`${date}`}
+              />
+            ) : (
+              <Card1 title="Loading ..." description="Loading ..." content="" />
+            )}
+          </div>
+          {/* endanother */}
         </div>
+
+        {/* end */}
       </div>
-      <div className={style.container}>
-        <div className={style.apple}>
+
+      <div className={`${style.container}`}>
+        <div className={`${style.apple}`}>
           <h3>Know about yourself</h3>
           <ScatterPlot />
         </div>
-        <div className={style.fruits}>
+        <div className={`${style.fruits}`}>
           <div className={style.mango}>
             {loading1 ? (
               <Card2 isLoading={true} user={user.user?.user?.email} />

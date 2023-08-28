@@ -11,7 +11,7 @@ import {
 } from "firebase/auth";
 import { App1 } from "@/Firebase/setup";
 export const authOptions: NextAuthOptions = {
-  secret: process.env.AUTH_SECRET,
+  secret: process.env.NEXT_PUBLIC_AUTH_SECRET,
   providers: [
     Credentials({
       name: "Credentials",
