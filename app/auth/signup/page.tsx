@@ -9,8 +9,6 @@ import axios from "axios";
 const domain = process.env.NEXT_PUBLIC_NEXT_DOMAIN;
 
 const Register = () => {
-  console.log(process.env.NEXT_PUBLIC_MONGO_URI);
-  console.log(domain);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showAlert, setAlert] = useState(false);

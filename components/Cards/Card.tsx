@@ -14,7 +14,7 @@ interface Props {
 export default function Card1(props: Props) {
   const CardDisplay = (
     <Card
-      className="py-4"
+      className="flex-1 w-[100%]"
       style={{
         display: "flex",
         flexDirection: "row",

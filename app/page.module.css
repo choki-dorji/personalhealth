@@ -2,7 +2,6 @@
   display: flex;
   margin-top: 20px;
   flex-direction: row;
-  /* background-color: antiquewhite; */
   height: 70vh;
   margin-bottom: 20px;
 }
@@ -17,19 +16,33 @@
 }
 
 .container3 {
-  /* margin-top: 20px; */
-  /* background-color: red; */
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Create three equal columns */
-  grid-gap: 1rem; /* Add gap between cards if desired */
+  grid-template-columns: repeat(2, 1fr); 
+  grid-gap: 1rem; 
   width: 100%;
 }
+
+@media (max-width: 624px) {
+  /* For phone view */
+  .container3 {
+    margin-top: 20px;
+    grid-template-columns: repeat(1, 1fr); 
+    margin-bottom: 200px;
+  }
+  .container {
+    margin-top: 20px;
+    flex-direction: column-reverse;
+    height: 70vh;
+    margin-bottom: 20px;
+  }
+}
+
+
 
 .apple {
   padding-top: 70px;
   padding-left: 10px;
  background-color: #333333;
-  
   width: 75%;
   border: 1px solid white;
   /* background-color: blue; */
@@ -70,3 +83,6 @@
   cursor: pointer;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
+
+
+

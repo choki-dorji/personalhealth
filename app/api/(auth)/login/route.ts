@@ -11,10 +11,12 @@ export async function POST(request: NextRequest) {
     const auth = getAuth(App1);
 
     const {email, password} = await request.json()
+    console.log("loggin")
   try {
     // await axios.get("https://projectauthbackend-default-rtdb.firebaseio.com/user.json")
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
+    console.log(user)
     // You can access user data, handle UI changes, and more here
     return NextResponse.json({loggedin: user}, {status: 200})
 

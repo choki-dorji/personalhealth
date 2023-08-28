@@ -36,7 +36,6 @@ export default function ScatterPlot() {
     setAuthuser(specificuser);
 
     const aggregatedData: any = {};
-
     specificuser?.forEach((entry) => {
       const { user, month, count } = entry;
       if (aggregatedData[month]) {
@@ -98,9 +97,7 @@ export default function ScatterPlot() {
         <div className="flex justify-center">
           <p>Fetching Data ....</p>
         </div>
-      ) : authuser && authuser?.length > 0 ? (
-        <canvas id="myChart" ref={canvasEl} height="100" />
-      ) : (
+      ) : authuser && authuser?.length === 0 ? (
         <div className="flex flex-col items-center">
           <div>
             <h1 className="text-4xl">No Data Available</h1>
@@ -109,6 +106,8 @@ export default function ScatterPlot() {
             <Image src="/nodata.jpg" alt="modata" height={200} width={200} />
           </div>
         </div>
+      ) : (
+        <canvas id="myChart" ref={canvasEl} height="100" />
       )}
     </div>
   );

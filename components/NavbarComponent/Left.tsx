@@ -7,13 +7,21 @@ import {
   NavbarMenu,
   NavbarMenuItem,
 } from "@nextui-org/navbar";
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from "@nextui-org/react";
 import { Button, Input } from "@nextui-org/react";
 import { signOut, useSession } from "next-auth/react";
 import { SearchIcon } from "@/components/icons";
 import { ThemeSwitch } from "@/components/theme-switch";
 import Link from "next/link";
-import { links } from "./Links";
+import { links, dropdown } from "./Links";
 import User1 from "../User/User";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import NextLink from "next/link";
 
 interface Auth {
   image: string;
@@ -35,6 +43,7 @@ function Left(props: Auth) {
         {/* <Button onClick={() => signOut()}>Log Out</Button> */}
       </NavbarContent>
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
+        <User1 image={props.image} email={props.email} />
         <ThemeSwitch />
         <NavbarMenuToggle />
       </NavbarContent>
@@ -42,15 +51,42 @@ function Left(props: Auth) {
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {links.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
-              <Link color="foreground" href={item.href}>
-                {item.name}
-              </Link>
+              {item.name === "Add Record" ? (
+                <Dropdown>
+                  <DropdownTrigger style={{ cursor: "pointer" }}>
+                    Add Record
+                  </DropdownTrigger>
+                  <DropdownMenu
+                    aria-label="ACME features"
+                    className="w-[340px]"
+                    itemClasses={{
+                      base: "gap-4",
+                    }}
+                  >
+                    {dropdown.map((item) => (
+                      <DropdownItem
+                        key={item.id}
+                        description={item.name}
+                        startContent={<FontAwesomeIcon icon={item.icon} />}
+                      >
+                        <NextLink href={item.url}>{item.title}</NextLink>
+                      </DropdownItem>
+                    ))}
+                  </DropdownMenu>
+                </Dropdown>
+              ) : (
+                <Link color="foreground" href={item.href}>
+                  {item.name}
+                </Link>
+              )}
             </NavbarMenuItem>
           ))}
         </div>
         <Button
           onClick={() =>
-            signOut({ callbackUrl: "http://localhost:3000/auth/signin" })
+            signOut({
+              callbackUrl: `${process.env.NEXT_PUBLIC_NEXT_DOMAIN}auth/signin`,
+            })
           }
         >
           Log Out
