@@ -23,10 +23,12 @@ function Search() {
           type="text"
           label="Search Prescription"
           value={value}
-          onChange={(e: any) => setValue(e.target.value)}
+          onChange={(e: any) => {
+            setValue(e.target.value);
+            dispatch(searchPrescription(e.target.value));
+          }}
           //   className="mr-2 h-[2rem]" // Margin and equal height
         />
-
         <Button type="submit" className="mt-2 h-[3rem]">
           Search
         </Button>

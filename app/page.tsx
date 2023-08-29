@@ -72,6 +72,7 @@ function Home() {
       <div
         className={`flex sm: flex-row md:flex-row xl: flex-col lg:flex-col${style.container1} `}
       >
+        {/* <Usermess user={user.user?.user?.email} /> */}
         <div className="sm:w-[100%] xs:w-[100%] md:w-[100%] md:mr-4 lg:mr-4 xl:mr-4 sm:mr-0 xs:mr-0">
           <Card1
             title={
@@ -83,6 +84,7 @@ function Home() {
             description1=" "
           />
         </div>
+
         {/* one */}
         <div
           className={`flex flex-row ${style.container3} xs:top-4 sm:mt-4 md:mt-0 xl:mt-0 lg:mt-0`}
