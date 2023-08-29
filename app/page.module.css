@@ -22,19 +22,38 @@
   width: 100%;
 }
 
-@media (max-width: 624px) {
+@media (max-width : 624px) {
   /* For phone view */
   .container3 {
     margin-top: 20px;
     grid-template-columns: repeat(1, 1fr); 
-    margin-bottom: 200px;
+    
   }
   .container {
     margin-top: 20px;
     flex-direction: column-reverse;
-    height: 70vh;
+    height: 150vh;
     margin-bottom: 20px;
+    align-items: center;
+    gap: 3  
   }
+  
+.apple {
+ width: 100vh;
+ margin-top: 30px;
+ height: 140vh;
+  /* background-color: blue; */
+}
+.fruits {
+  width: 200vh;
+  flex-direction: column;
+  align-items: center;
+}
+.mango{
+  width: 400%;
+  /* align-items: center; */
+  /* margin-left: 190px; */
+}
 }
 
 
@@ -53,14 +72,12 @@
   display: flex;
   width: 25%;
   flex-direction: column;
-  
- 
 }
 .mango{
-  /* margin-bottom: 10px; */
-  /* background-color: aquamarine; */
   height: 50%;
 }
+
+
 .banana{
   margin-top: 100px;
   /* background-color: blueviolet; */

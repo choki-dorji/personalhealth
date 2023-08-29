@@ -13,6 +13,7 @@ import Loader from "@/components/Loader/load";
 import { Loginuserdata } from "@/utils/util";
 import { Presc } from "@/types";
 import { useGetItemOnSessionChange } from "@/utils/islogin";
+import Link from "next/link";
 
 interface State {
   text: string;
@@ -28,6 +29,7 @@ function Page() {
   const userdata = useSelector((state: any) => state.user);
   // console.log(userdata);
 
+  console.log(searchText);
   if (isLoading) {
     return (
       <div
@@ -49,9 +51,10 @@ function Page() {
 
   // console.log(specificuser);
 
-  const filtered: Presc[] = specificuser.filter(
-    (item: Presc) => item.Diagonisis === searchText.text
+  const filtered: Presc[] = specificuser.filter((item: Presc) =>
+    item.Diagonisis.toLowerCase().includes(searchText.text.toLowerCase())
   );
+  console.log(filtered);
 
   return (
     <div>
@@ -65,6 +68,7 @@ function Page() {
             alignItems: "center",
           }}
         >
+          {/* {filtered.length === 0 ? <div>No Search Results</div> : ""} */}
           {filtered && filtered.length > 0 ? (
             <Prescription
               _id={filtered[0]._id}
@@ -75,7 +79,15 @@ function Page() {
               OtherInformation={filtered[0].OtherInformation}
               date={filtered[0].date}
             />
-          ) : specificuser.length > 0 ? (
+          ) : specificuser.length === 0 ? (
+            <div>
+              <p>No prescription</p>
+            </div>
+          ) : searchText.text !== "" && filtered && filtered.length === 0 ? (
+            <div>
+              <p>No Search Result</p>
+            </div>
+          ) : (
             specificuser.map((item: any) => (
               <Prescription
                 _id={item._id}
@@ -87,10 +99,6 @@ function Page() {
                 date={item.date}
               />
             ))
-          ) : (
-            <div>
-              <p>No prescription</p>
-            </div>
           )}
         </div>
       </div>

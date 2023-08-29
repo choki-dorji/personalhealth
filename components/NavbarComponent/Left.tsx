@@ -22,6 +22,7 @@ import { links, dropdown } from "./Links";
 import User1 from "../User/User";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NextLink from "next/link";
+import Search from "./searchfrom";
 
 interface Auth {
   image: string;
@@ -36,6 +37,7 @@ function Left(props: Auth) {
         justify="end"
       >
         <NavbarItem className="hidden sm:flex gap-2">
+          {/* <Search /> */}
           <ThemeSwitch />
         </NavbarItem>
         {/* <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem> */}

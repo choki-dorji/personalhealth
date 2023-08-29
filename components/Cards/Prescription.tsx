@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Card, CardHeader, CardBody, Divider } from "@nextui-org/react";
 import { Tooltip } from "@nextui-org/react";
-
+import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCapsules,
@@ -54,7 +54,10 @@ export default function Prescription(props: Presc) {
       <Card className="w-[70%] m-2">
         <CardHeader className="flex justify-between items-center gap-3">
           <div className="flex flex-col ml-3">
-            <p className="text-md">{props.Diagonisis}</p>
+            <Link href={`/prescription/prescrip/${props._id}`}>
+              <p className="text-md">{props.Diagonisis}</p>
+            </Link>
+            {/* <p className="text-md">{props.Diagonisis}</p> */}
             <p className="text-small text-default-500">Date: {props.date}</p>
           </div>
           <div className="flex justify-between">

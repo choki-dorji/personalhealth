@@ -28,6 +28,7 @@ export default function App(props: Auth) {
         <DropdownTrigger>
           <Avatar
             isBordered
+            color="success"
             as="button"
             className="transition-transform"
             src={
