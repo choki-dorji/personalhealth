@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Popup.module.css"; // You can create this CSS file to style your pop-up
 
-const Popup = ({ initiallyOpen = false }) => {
+export default function Popup({ initiallyOpen = false }) {
   const [isOpen, setIsOpen] = useState(initiallyOpen);
 
   useEffect(() => {
@@ -28,6 +28,4 @@ const Popup = ({ initiallyOpen = false }) => {
       )}
     </div>
   );
-};
-
-export default Popup;
+}
