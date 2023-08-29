@@ -1,17 +1,9 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./Popup.module.css";
 
-interface PopupProps {
-  initiallyOpen: boolean;
-}
-
-export default function Popup({ initiallyOpen }: PopupProps) {
-  const [isOpen, setIsOpen] = useState(initiallyOpen);
-
-  useEffect(() => {
-    setIsOpen(initiallyOpen);
-  }, [initiallyOpen]);
+export default function Popup() {
+  const [isOpen, setIsOpen] = useState(false);
 
   const closePopup = () => {
     setIsOpen(false);
