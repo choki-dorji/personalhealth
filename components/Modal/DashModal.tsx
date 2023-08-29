@@ -8,8 +8,8 @@ import {
   ModalFooter,
   Button,
   useDisclosure,
-  Input,
 } from "@nextui-org/react";
+import { Input } from "@nextui-org/input";
 import { usePostAlarmMutation } from "@/store/medicinereducer";
 
 function DashModal() {

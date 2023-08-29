@@ -1,13 +1,11 @@
-"use client";
 import React, { useState, useEffect } from "react";
-import styles from "./Popup.module.css"; // You can create this CSS file to style your pop-up
+import styles from "./Popup.module.css";
 
-interface pop {
+interface PopupProps {
   initiallyOpen: boolean;
 }
 
-export default function Popup() {
-  const initiallyOpen = false;
+export default function Popup({ initiallyOpen }: PopupProps) {
   const [isOpen, setIsOpen] = useState(initiallyOpen);
 
   useEffect(() => {
