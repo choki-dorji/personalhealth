@@ -2,7 +2,12 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Popup.module.css"; // You can create this CSS file to style your pop-up
 
-export default function Popup({ initiallyOpen = false }) {
+interface pop {
+  initiallyOpen: boolean;
+}
+
+export default function Popup() {
+  const initiallyOpen = false;
   const [isOpen, setIsOpen] = useState(initiallyOpen);
 
   useEffect(() => {
