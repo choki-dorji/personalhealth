@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { useGetBpQuery } from "@/store/bp";
 import { formatDateToString } from "@/utils/MonthDate/date";
-import Load from "./components/Skeleton/load/page";
+
 import DashModal from "./components/Modal/DashModal";
 import React from "react";
 import { Modal, useDisclosure } from "@nextui-org/react";
