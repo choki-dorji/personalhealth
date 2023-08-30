@@ -1,16 +1,16 @@
 "use client";
-import AddWeight from "@/components/FormAdd'/AddWeight";
+import AddWeight from "../components/FormAdd'/AddWeight";
 import React, { useState } from "react";
-import CardWithHead from "@/components/Cards/Card1";
-import ScatterPlot from "@/components/chart/chart";
+import CardWithHead from "../components/Cards/Card1";
+import ScatterPlot from "../components/chart/chart";
 import { useSelector } from "react-redux";
 import { useGetBMIQuery } from "@/store/bp";
-import Paginations from "@/components/Pagination/pagination";
+import Paginations from "../components/Pagination/pagination";
 import { useGetBMIDataQuery } from "@/store/bp";
-import BMIGraph from "@/components/chart/GraphBMI";
+import BMIGraph from "../components/chart/GraphBMI";
 import { BMIitem } from "@/types";
 import { useGetItemOnSessionChange } from "@/utils/islogin";
-import Loader from "@/components/Loader/load";
+import Loader from "../components/Loader/load";
 
 function BMI() {
   useGetItemOnSessionChange();

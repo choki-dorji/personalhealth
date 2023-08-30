@@ -9,7 +9,7 @@ import {
 } from "@nextui-org/react";
 import React from "react";
 import { useGetPrescriptionQuery } from "@/store/medicinereducer";
-import Loader from "@/components/Loader/load";
+import Loader from "@/app/components/Loader/load";
 import {
   Modal,
   ModalContent,

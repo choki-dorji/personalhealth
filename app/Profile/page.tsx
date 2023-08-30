@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import styles from "./profile.module.css";
 import { useSession } from "next-auth/react";
 import { LoginUserProfile } from "@/utils/util";
-import Loader from "@/components/Loader/load";
+import Loader from "../components/Loader/load";
 import {
   useGetFireDataQuery,
   useEditFireMutation,

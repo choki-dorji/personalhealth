@@ -62,11 +62,7 @@ const BMIGraph = (props: any) => {
     }
   }, [props.Healthdata]);
 
-  return (
-    <div>
-      <canvas ref={canvasRef} width="400" height="100"></canvas>
-    </div>
-  );
+  return <canvas ref={canvasRef} width="400" height="100"></canvas>;
 };
 
 export default BMIGraph;

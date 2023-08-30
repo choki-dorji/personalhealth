@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Prescription, Presc } from "@/types";
+import { Prescription, Presc, graphdata } from "@/types";
 import { Alarmdata, Alldata, editPrescription } from "@/types";
 
 
@@ -53,8 +53,8 @@ export const AppSlice = createApi({
     
       invalidatesTags: ['prescription'],
     }),
-    getAllPrescription : builder.query<Alldata, void>({
-      query: () => `/api/HealthData/all`,
+    getAllPrescription : builder.query<graphdata, string>({
+      query: (id) => `/api/HealthData/all/${id}`,
       providesTags: ['prescription']
     }),
     deleteAlarm : builder.mutation({

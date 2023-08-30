@@ -125,6 +125,12 @@ export interface onedata{
 export interface Alldata{
   Healthdata: onedata[]
 }
+
+export interface graphdata {
+  month: string | null | undefined,
+  year: string | null | undefined
+}
+
 export interface BMIitem {
   _id: string;
   Height: number;

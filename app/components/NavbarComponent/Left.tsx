@@ -15,8 +15,8 @@ import {
 } from "@nextui-org/react";
 import { Button, Input } from "@nextui-org/react";
 import { signOut, useSession } from "next-auth/react";
-import { SearchIcon } from "@/components/icons";
-import { ThemeSwitch } from "@/components/theme-switch";
+import { SearchIcon } from "../icons";
+import { ThemeSwitch } from "../theme-switch";
 import Link from "next/link";
 import { links, dropdown } from "./Links";
 import User1 from "../User/User";

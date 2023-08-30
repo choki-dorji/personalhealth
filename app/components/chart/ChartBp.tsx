@@ -108,11 +108,7 @@ const PressureBarGraph = (props: any) => {
     }
   }, [props.data]);
 
-  return (
-    <div>
-      <canvas ref={canvasRef} width="400" height="100"></canvas>
-    </div>
-  );
+  return <canvas ref={canvasRef} width="400" height="100"></canvas>;
 };
 
 export default PressureBarGraph;

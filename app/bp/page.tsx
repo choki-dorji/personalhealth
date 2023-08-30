@@ -1,15 +1,15 @@
 "use client";
-import Add from "@/components/FormAdd'/Add";
+import Add from "../components/FormAdd'/Add";
 import React, { useState } from "react";
-import CardWithHead from "@/components/Cards/Card1";
+import CardWithHead from "../components/Cards/Card1";
 import { useGetBpQuery } from "@/store/bp";
 import { useSelector } from "react-redux";
-import PressureBarGraph from "@/components/chart/ChartBp";
+import PressureBarGraph from "../components/chart/ChartBp";
 import { useGetBlooddataQuery } from "@/store/bp";
-import Paginations from "@/components/Pagination/pagination";
+import Paginations from "../components/Pagination/pagination";
 import { User, loginuser, bloodData } from "@/types";
 import { useGetItemOnSessionChange } from "@/utils/islogin";
-import Loader from "@/components/Loader/load";
+import Loader from "../components/Loader/load";
 
 interface items {
   _id: string;
