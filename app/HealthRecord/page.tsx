@@ -30,7 +30,7 @@ function Health() {
       .then((r) => console.log("updated"))
       .catch((err) => console.log(err));
     // console.log("after yser");
-    form.reset();
+    // form.reset();
   };
   if (isSuccess) {
     toast.success("Record inserted successfully", {
