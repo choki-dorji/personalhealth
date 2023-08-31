@@ -67,3 +67,30 @@ export function LoginUserProfile(data: any, targetEmail: string | null | undefin
 
 
 }
+
+export function convertIsoToCustomFormat(isoDatetime: string) {
+    // Parse the ISO 8601 date-time string
+    const parsedDatetime = new Date(isoDatetime);
+    // Define month names
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    // Format the date in the desired format
+    const formattedDate = `${parsedDatetime.getDate()} ${
+      monthNames[parsedDatetime.getMonth()]
+    } ${parsedDatetime.getFullYear()}`;
+
+    return formattedDate;
+  }

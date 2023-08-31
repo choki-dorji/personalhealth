@@ -171,3 +171,15 @@ export interface User {
 export interface UserData {
   userList: User[];
 }
+
+export interface items {
+  _id: string;
+  date: string;
+  highPressure: number;
+  lowerPressure: number;
+  description: string;
+}
+
+export interface BloodCard{
+  
+}

@@ -27,9 +27,6 @@ function Page() {
   const { data, isLoading, error } = useGetPrescriptionQuery();
   const searchText = useSelector((state: inState) => state.search);
   const userdata = useSelector((state: any) => state.user);
-  // console.log(userdata);
-
-  console.log(searchText);
   if (isLoading) {
     return (
       <div
@@ -57,7 +54,6 @@ function Page() {
       );
     }
   });
-  console.log(filtered);
 
   return (
     <div>
@@ -95,7 +91,6 @@ function Page() {
           ) : (
             specificuser.map((item: any) => (
               <>
-                {" "}
                 <Prescription
                   _id={item._id}
                   key={item._id}

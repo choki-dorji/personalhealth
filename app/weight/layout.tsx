@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import AddWeight from "../components/FormAdd'/AddWeight";
 
 export const metadata: Metadata = {
   title: {
@@ -12,5 +13,22 @@ export const metadata: Metadata = {
   },
 };
 export default function Signin({ children }: { children: React.ReactNode }) {
-  return <>{children} </>;
+  return (
+    <>
+      <div className="flex justify-center">
+        <h1>Add BMI data</h1>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+        }}
+      >
+        <AddWeight />
+      </div>
+
+      {children}
+    </>
+  );
 }
