@@ -4,6 +4,7 @@ import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Providers } from "./providers";
 import { Navbar } from "./components/navbar";
+import Footer from "./components/Footer/footer";
 
 import clsx from "clsx";
 import { Provider1 } from "@/store/Providers1";
@@ -51,6 +52,7 @@ export default function RootLayout({
                   {children}
                 </main>
               </Provider1>
+              <Footer />
             </NextAUthSession>
           </div>
         </Providers>
