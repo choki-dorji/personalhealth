@@ -39,11 +39,10 @@ export const options = {
 export default function ScatterPlot() {
   const { data: session, status } = useSession();
   console.log(session);
-  const {
-    data: data1,
-    isLoading,
-    error,
-  } = useGetAllPrescriptionQuery(session?.user?.email);
+
+  const { data: data1, isLoading, error } =
+    //@ts-ignore
+    useGetAllPrescriptionQuery(session?.user?.email);
 
   if (isLoading) {
     return (
