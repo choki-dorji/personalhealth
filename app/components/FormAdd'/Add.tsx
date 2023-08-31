@@ -45,28 +45,6 @@ function Add() {
 
   // sgould be less than higher than lower than
   return (
-    // <>
-    //   <form className="flex justify-center" onSubmit={handleSubmit}>
-    //     <Input1
-    //       type="number"
-    //       label={props.label1}
-    //       value={value}
-    //       onChange={(e) => setValue(e.target.value)}
-    //       className="mr-2 h-[2rem]" // Margin and equal height
-    //     />
-    //     <Input1
-    //       type="number"
-    //       label={props.label2}
-    //       value={value1}
-    //       onChange={(e) => setValue1(e.target.value)}
-    //       className="mr-2 h-[2rem]" // Margin and equal height
-    //     />
-    //     <Button type="submit" className="mt-2 h-[3rem]">
-    //       Add
-    //     </Button>
-    //     <ToastContainer />
-    //   </form>
-    // </>
     <>
       <Form onSubmit={submithandler}>
         {({ handleSubmit, values, submitting }) => (
