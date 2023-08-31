@@ -5,12 +5,14 @@ import { BloodSlice } from "./bp";
 import searchReducer from "./search";
 import timereducer from "./timereducer";
 import { FireSlice } from "./firebase";
+import searchuser from "./searchuser";
 
 const store = configureStore({
     reducer: {
         user: reducer,
         search: searchReducer,
         time: timereducer,
+        searchuser: searchuser,
        [AppSlice.reducerPath] : AppSlice.reducer,
        [BloodSlice.reducerPath] : BloodSlice.reducer,
        [FireSlice.reducerPath]: FireSlice.reducer

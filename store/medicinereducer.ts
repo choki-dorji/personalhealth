@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Prescription, Presc, graphdata } from "@/types";
 import { Alarmdata, Alldata, editPrescription } from "@/types";
+import { UserData } from "@/types";
 
 
 export const AppSlice = createApi({
@@ -64,6 +65,9 @@ export const AppSlice = createApi({
       }),
       invalidatesTags: ['alarm']
       
+    }),
+    getAlluser: builder.query<UserData, void>({
+      query : () => "api/allusers"
     })
 
     // blood pressure graph data
@@ -74,5 +78,5 @@ export const AppSlice = createApi({
   }),
 });
 
-export const { useDeleteAlarmMutation, useGetAllPrescriptionQuery, useGetAlarmQuery, useEditPrescriptionMutation ,usePostAlarmMutation, useGetPrescriptionQuery, usePostPrescriptionMutation, useGetDetailPrescriptionQuery, useDeletePrescriptionMutation } =
+export const { useGetAlluserQuery, useDeleteAlarmMutation, useGetAllPrescriptionQuery, useGetAlarmQuery, useEditPrescriptionMutation ,usePostAlarmMutation, useGetPrescriptionQuery, usePostPrescriptionMutation, useGetDetailPrescriptionQuery, useDeletePrescriptionMutation } =
   AppSlice;
