@@ -8,6 +8,7 @@ import Left from "./NavbarComponent/Left";
 import Right from "./NavbarComponent/Right";
 import { LoginUserProfile } from "@/utils/util";
 import { getAuthData } from "@/store/Authenticated";
+import Search from "./NavbarComponent/searchfrom";
 
 import {
   useGetFireDataidQuery,
@@ -40,7 +41,9 @@ export const Navbar = () => {
         )}
       </NavbarContent>
       {status === "authenticated" ? (
-        <Left image={data1?.image} email={data1?.email} />
+        <>
+          <Left image={data1?.image} email={data1?.email} />
+        </>
       ) : (
         ""
       )}

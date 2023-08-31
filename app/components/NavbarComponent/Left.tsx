@@ -37,7 +37,7 @@ function Left(props: Auth) {
         justify="end"
       >
         <NavbarItem className="hidden sm:flex gap-2">
-          {/* <Search /> */}
+          <Search />
           <ThemeSwitch />
         </NavbarItem>
         {/* <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem> */}
@@ -45,6 +45,7 @@ function Left(props: Auth) {
         {/* <Button onClick={() => signOut()}>Log Out</Button> */}
       </NavbarContent>
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
+        <Search />
         <User1 image={props.image} email={props.email} />
         <ThemeSwitch />
         <NavbarMenuToggle />

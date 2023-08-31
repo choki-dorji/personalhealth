@@ -1,13 +1,58 @@
-import React from "react";
+"use client";
+import React, { ChangeEvent } from "react";
 import { Input } from "@nextui-org/react";
 import { SearchIcon } from "./SearchIcon";
+import { searchedUser } from "@/store/searchuser";
+import { useState } from "react";
+import { User } from "@/types";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Divider,
+  Image,
+} from "@nextui-org/react";
+import { useGetFireDataQuery } from "@/store/firebase";
+import { useGetAlluserQuery } from "@/store/medicinereducer";
+import store from "@/store/store";
+import Link from "next/link";
+
+const link =
+  "https://firebasestorage.googleapis.com/v0/b/projectauthbackend.appspot.com/o/images";
 
 export default function Search() {
+  const [search, setSearch] = useState("");
+  console.log(store.getState());
+  const { data: user, isLoading: userloading } = useGetAlluserQuery();
+  const { data, isLoading } = useGetFireDataQuery();
+  if (isLoading || userloading) {
+    return <p>Loading</p>;
+  }
+  let filter: User[] | undefined;
+  if (search !== "") {
+    filter = user?.userList.filter(
+      (user) =>
+        user.name?.toLowerCase().includes(search) ||
+        user.email.toLowerCase().includes(search)
+    );
+  }
+  console.log(filter);
+  // const imagelink = `${link}%2F${data1.image}?alt=media`;
   return (
-    <div>
+    <div
+      className="flex flex-col justify-start"
+      style={
+        filter && filter.length > 0
+          ? { marginTop: "13rem" }
+          : { marginTop: "0.7rem" }
+      }
+    >
       <Input
+        onChange={(e: any) => setSearch(e.target.value)}
         isClearable
         radius="lg"
+        style={{ width: "100%" }}
         classNames={{
           label: "text-black/50 dark:text-white/90",
           input: [
@@ -34,9 +79,34 @@ export default function Search() {
           <SearchIcon className="text-black/50 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
         }
       />
-      <div className="bg-red border-radius-4 mt-4">
-        <div>djfvkj</div>
-      </div>
+      {filter && filter.length > 0 ? (
+        <Card className="max-w-[400px] h-[200px] overflow-auto ">
+          {filter.map((value) => (
+            <div key={value.email}>
+              <Link href={`/userdisplay/${value.email}`}>
+                <CardHeader className="flex gap-3 cursor-pointer">
+                  <Image
+                    alt="nextui logo"
+                    height={40}
+                    radius="sm"
+                    src={
+                      value.image !== ""
+                        ? `${link}%2F${value.image}?alt=media`
+                        : "/image.png"
+                    }
+                    width={40}
+                  />
+                  <div className="flex flex-col">
+                    <p className="text-md">{value.name || value.email}</p>
+                    <p className="text-small text-default-500">{value.email}</p>
+                  </div>
+                </CardHeader>
+              </Link>
+              <Divider />
+            </div>
+          ))}
+        </Card>
+      ) : null}
     </div>
   );
 }

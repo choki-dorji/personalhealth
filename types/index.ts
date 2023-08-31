@@ -160,3 +160,14 @@ export interface editPrescription{
   Medicine: string,
   OtherInformation: string,}
 }
+export interface User {
+  address?: string;
+  email: string;
+  image?: string;
+  key?: string;
+  name?: string;
+}
+
+export interface UserData {
+  userList: User[];
+}
