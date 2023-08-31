@@ -15,7 +15,6 @@ import Select from "../Select/page";
 import { useSelector } from "react-redux";
 import { Alarm, Alarmdata } from "@/types";
 import { Alarms, format12Hour } from "@/utils/util";
-import A from "../sound/Notifi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrash,
