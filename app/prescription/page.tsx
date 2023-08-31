@@ -49,9 +49,6 @@ function Page() {
     userdata.user?.user?.email
   );
 
-  console.log(specificuser);
-
-  console.log(searchText);
   // console
   const filtered: Presc[] = specificuser.filter((item: Presc) => {
     if (searchText.text) {
