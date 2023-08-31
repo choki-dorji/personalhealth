@@ -46,8 +46,12 @@ function Health() {
   const required = (value: any) =>
     value ? undefined : "This field is required";
   return (
-    <div style={{ display: "flex", justifyContent: "center" }}>
-      <Form onSubmit={(values, form) => onsubmit(values, form)}>
+    <div
+      style={{ display: "flex", justifyContent: "center" }}
+    >
+      <Form
+        onSubmit={(values, form) => onsubmit(values, form)}
+      >
         {({ handleSubmit, values, submitting }) => (
           <form onSubmit={handleSubmit}>
             <Field
