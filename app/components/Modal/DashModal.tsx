@@ -1,25 +1,24 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import {
-  Modal,
   ModalContent,
   ModalHeader,
   ModalBody,
   ModalFooter,
   Button,
-  useDisclosure,
 } from "@nextui-org/react";
 import { Input } from "@nextui-org/input";
 import { usePostAlarmMutation } from "@/store/medicinereducer";
 
 function DashModal() {
-  const [AlarmPost, { isLoading }] = usePostAlarmMutation();
+  const [AlarmPost, { isLoading, isError }] = usePostAlarmMutation();
   const user = useSelector((state: any) => state.user);
   const [medicine, setMedicine] = useState("");
   const [time, setTime] = useState("");
 
   const isButtonDisabled = time === "" || medicine === ""; // Disable button if either input is empty
 
+  console.log(isError);
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
     try {

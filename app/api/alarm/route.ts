@@ -5,8 +5,12 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
     const {time, medicine, notification, user} = await request.json()
     await connectMongooDB()
-    await Notification.create({time: time, medicine: medicine, notification: notification, user: user})
-    return NextResponse.json({message: "topic Created"}, {status: 201})
+    try{
+        await Notification.create({time: time, medicine: medicine, notification: notification, user: user})
+        return NextResponse.json({message: "topic Created"}, {status: 201})
+    }catch (err) {
+        console.error("errpr", err)
+    }
 }
 export async function GET(){
     await connectMongooDB()

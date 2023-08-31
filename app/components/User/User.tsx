@@ -21,6 +21,7 @@ const link =
 
 export default function App(props: Auth) {
   const userimage = useSelector((state: any) => state.user);
+  // console.log(userimage.user.user.email);
 
   return (
     <div className="flex items-center gap-4">
@@ -32,9 +33,9 @@ export default function App(props: Auth) {
             as="button"
             className="transition-transform"
             src={
-              userimage
+              props.image !== ""
                 ? `${link}${props.image}?alt=media`
-                : "https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                : "/image.png"
             }
           />
         </DropdownTrigger>
@@ -45,9 +46,7 @@ export default function App(props: Auth) {
         >
           <DropdownItem key="profile" className="h-14 gap-2">
             <p className="font-semibold">Signed in as</p>
-            <p className="font-semibold">
-              {userimage.user?.user?.email || props.email}
-            </p>
+            <p className="font-semibold">{userimage.user?.user?.email}</p>
           </DropdownItem>
           {/* <DropdownItem key="settings">My Settings</DropdownItem> */}
           {/* <DropdownItem key="team_settings">Team Settings</DropdownItem> */}

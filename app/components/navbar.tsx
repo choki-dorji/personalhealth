@@ -26,6 +26,7 @@ export const Navbar = () => {
     isLoading: load,
     error: errorr,
   } = useGetFireDataidQuery(iduser && iduser);
+  // console.log(data1.image);
 
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
