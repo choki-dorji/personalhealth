@@ -1,5 +1,4 @@
 import styles from "./sign.module.css";
-import Add from "@/components/FormAdd'/Add";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
