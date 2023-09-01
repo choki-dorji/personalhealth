@@ -31,11 +31,7 @@ export default function App(props: Auth) {
             color="success"
             as="button"
             className="transition-transform"
-            src={
-              userimage
-                ? `${link}${props.image}?alt=media`
-                : "https://i.pravatar.cc/150?u=a042581f4e29026704d"
-            }
+            src={props.image ? `${link}${props.image}?alt=media` : "/image.png"}
           />
         </DropdownTrigger>
         <DropdownMenu
