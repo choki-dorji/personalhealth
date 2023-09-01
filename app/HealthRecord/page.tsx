@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Form, Field } from "react-final-form";
 import { Button } from "@nextui-org/react";
 import styles from "./health.module.css";
@@ -14,6 +14,7 @@ import { useGetItemOnSessionChange } from "@/utils/islogin";
 function Health() {
   useGetItemOnSessionChange();
   const user = useSelector((state: any) => state.user);
+  const [submit, setSubmit] = useState(false);
 
   // rtk call
   const [post, { isLoading: isEditing, isSuccess, isError }] =
@@ -30,7 +31,11 @@ function Health() {
       .then((r) => console.log("updated"))
       .catch((err) => console.log(err));
     // console.log("after yser");
-    form.reset("");
+    // form.mutators.resetValidation();
+    form.restart();
+    // if (form.reset()) {
+    //   setSubmit(true);
+    // }
   };
   if (isSuccess) {
     toast.success("Record inserted successfully", {

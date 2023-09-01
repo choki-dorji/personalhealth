@@ -31,7 +31,6 @@ function AddWeight() {
       user: session?.user?.email,
     });
   };
-
   return (
     <>
       <Form onSubmit={submithandler}>
