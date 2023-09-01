@@ -23,8 +23,6 @@ function Signin() {
     });
     console.log(result);
     if (result?.error === null) {
-      // router.push("/");
-      // router.refresh();
       window.location.href = "/";
     } else if (result?.error !== "SessionRequired") {
       return toast.error(result?.error ?? "Couldnot Login", {
@@ -37,8 +35,6 @@ function Signin() {
         progress: undefined,
       });
     } else {
-      // router.push("/");
-      // router.refresh();
       window.location.href = "/";
     }
   };
