@@ -162,7 +162,7 @@ function Home() {
         <div className={`${style.fruits}`}>
           <div className={style.mango}>
             {loading1 ? (
-              <Card2 isLoading={true} user={user.user?.user?.email} />
+              <Card2 isLoading={loading1} user={user.user?.user?.email} />
             ) : (
               <Card2
                 alarm={data1 && data1.alarm}
