@@ -9,6 +9,7 @@ import Right from "./NavbarComponent/Right";
 import { LoginUserProfile } from "@/utils/util";
 import { getAuthData } from "@/store/Authenticated";
 import Search from "./NavbarComponent/searchfrom";
+import { useRouter } from "next/navigation";
 
 import {
   useGetFireDataidQuery,
@@ -17,6 +18,7 @@ import {
 } from "@/store/firebase";
 
 export const Navbar = () => {
+  const router = useRouter();
   const { data: session, status } = useSession();
   const { data: profile, isLoading, error } = useGetFireDataQuery();
   const iduser = LoginUserProfile(profile, session?.user?.email);

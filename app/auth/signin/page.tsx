@@ -19,11 +19,13 @@ function Signin() {
       email: email.current,
       password: password.current,
       redirect: false,
-      // callbackUrl: "/",
+      callbackUrl: "/",
     });
     console.log(result);
     if (result?.error === null) {
-      router.push("/");
+      // router.push("/");
+      // router.refresh();
+      window.location.href = "/";
     } else if (result?.error !== "SessionRequired") {
       return toast.error(result?.error ?? "Couldnot Login", {
         position: "top-center",
@@ -35,7 +37,9 @@ function Signin() {
         progress: undefined,
       });
     } else {
-      router.push("/");
+      // router.push("/");
+      // router.refresh();
+      window.location.href = "/";
     }
   };
 
