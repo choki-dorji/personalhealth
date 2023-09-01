@@ -30,7 +30,7 @@ function Health() {
       .then((r) => console.log("updated"))
       .catch((err) => console.log(err));
     // console.log("after yser");
-    // form.reset();
+    form.reset("");
   };
   if (isSuccess) {
     toast.success("Record inserted successfully", {
@@ -46,12 +46,8 @@ function Health() {
   const required = (value: any) =>
     value ? undefined : "This field is required";
   return (
-    <div
-      style={{ display: "flex", justifyContent: "center" }}
-    >
-      <Form
-        onSubmit={(values, form) => onsubmit(values, form)}
-      >
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <Form onSubmit={(values, form) => onsubmit(values, form)}>
         {({ handleSubmit, values, submitting }) => (
           <form onSubmit={handleSubmit}>
             <Field

@@ -1,8 +1,5 @@
 import axios from "axios";
 import { NextResponse } from "next/server";
-
-
-  // ////edit
   export async function GET(
     request: Request,
     { params }: { params: { id: string } }

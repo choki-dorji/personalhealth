@@ -90,11 +90,25 @@ const NotificationSchema = new Schema(
     }
 );
 
-
-
-
-
-
+const user = new Schema(
+    {
+        name: {
+            type: String,
+            required: true,
+        },
+        email: {
+            type: String,
+            required: true,
+        },
+        image: {
+            type: String,
+            required: true,
+        },
+    },
+    {
+        timestamps: true,
+    }
+);
 
 const Topic = mongoose.models.Topic || mongoose.model("Topic", topicSchema)
 const Auth  = mongoose.models.Auth || mongoose.model("Auth", authSchema)
@@ -103,6 +117,7 @@ const BloodPressure  = mongoose.models.BloodPressure || mongoose.model("BloodPre
 const weightHeight  = mongoose.models.weightHeight || mongoose.model("weightHeight", weightHeightSchema)
 const symptom  = mongoose.models.symptom || mongoose.model("symptom", SymptomsSchema)
 const Notification  = mongoose.models.Notification || mongoose.model("Notification", NotificationSchema)
+const User  = mongoose.models.User || mongoose.model("User", user)
 
 
-export {Topic, Auth, Healthdata, BloodPressure, weightHeight, symptom, Notification};
+export {Topic, User, Auth, Healthdata, BloodPressure, weightHeight, symptom, Notification};

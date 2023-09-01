@@ -98,7 +98,7 @@ function Home() {
                 title={
                   loginuser.length > 0
                     ? `BMI = ${loginuser[loginuser.length - 1].BMI} `
-                    : "no data"
+                    : "BMI"
                 }
                 description={
                   loginuser && loginuser.length > 0
@@ -175,13 +175,13 @@ function Home() {
               Add Alarm{""}
               <FontAwesomeIcon icon={faCalendar} />
             </div>
-          ) : (
-            <div className={style.floatingButton} onClick={onOpen}>
-              Add Alarm{""}
-            </div>
-          )}
+          ) : // <div className={style.floatingButton} onClick={onOpen}>
+          //   Add Alarm{""}
+          // </div>
+          null}
 
           {/* should be in another file  */}
+
           <Modal
             isOpen={isOpen}
             onOpenChange={onOpenChange}
