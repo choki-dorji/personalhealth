@@ -1,0 +1,11 @@
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { BpData, Bmidata, BMIData, bloodData } from "@/types";
+
+const api = createApi({
+  reducerPath: "BloodSlice",
+  baseQuery: fetchBaseQuery({ baseUrl:  process.env.NEXT_PUBLIC_NEXT_DOMAIN }),
+  tagTypes: ['bp', "weight"],
+  endpoints: (builder) => ({ }),
+});
+
+export default api;
