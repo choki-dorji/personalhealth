@@ -9,7 +9,7 @@ import {
   faTrash,
   faFilePen,
 } from "@fortawesome/free-solid-svg-icons";
-import { useDeletePrescriptionMutation } from "@/store/medicinereducer";
+import { useDeletePrescriptionMutation } from "@/store/Medicine/medicine.api";
 import { Modal, useDisclosure } from "@nextui-org/react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

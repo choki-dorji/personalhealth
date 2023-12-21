@@ -8,7 +8,7 @@ import {
   Button,
 } from "@nextui-org/react";
 import React from "react";
-import { useGetPrescriptionQuery } from "@/store/medicinereducer";
+import { useGetPrescriptionQuery } from "@/store/Medicine/medicine.api";
 import Loader from "@/app/components/Loader/load";
 import {
   Modal,

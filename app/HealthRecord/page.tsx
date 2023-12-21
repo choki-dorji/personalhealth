@@ -5,7 +5,7 @@ import { Button } from "@nextui-org/react";
 import styles from "./health.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { usePostPrescriptionMutation } from "@/store/medicinereducer";
+import { usePostPrescriptionMutation } from "@/store/Medicine/medicine.api";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

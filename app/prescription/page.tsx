@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import {
   useGetDetailPrescriptionQuery,
   useGetPrescriptionQuery,
-} from "@/store/medicinereducer";
+} from "@/store/Medicine/medicine.api";
 import Loader from "../components/Loader/load";
 import { Loginuserdata } from "@/utils/util";
 import { Presc } from "@/types";

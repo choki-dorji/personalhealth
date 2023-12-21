@@ -61,7 +61,7 @@ import {
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch } from "react-redux";
-import { getSelectedTime } from "@/store/timereducer";
+import { getSelectedTime } from "@/store/time.reducer";
 import store from "@/store/store";
 
 export default function Select() {

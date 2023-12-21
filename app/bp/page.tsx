@@ -2,10 +2,10 @@
 import Add from "../components/FormAdd'/Add";
 import React, { useState } from "react";
 import CardWithHead from "../components/Cards/Card1";
-import { useGetBpQuery } from "@/store/bp";
+import { useGetBpQuery } from "@/store/BloodPressure/bloodpressure.api";
 import { useSelector } from "react-redux";
 import PressureBarGraph from "../components/chart/ChartBp";
-import { useGetBlooddataQuery } from "@/store/bp";
+import { useGetBlooddataQuery } from "@/store/BloodPressure/bloodpressure.api";
 import Paginations from "../components/Pagination/pagination";
 import { User, loginuser, bloodData } from "@/types";
 import { useGetItemOnSessionChange } from "@/utils/islogin";

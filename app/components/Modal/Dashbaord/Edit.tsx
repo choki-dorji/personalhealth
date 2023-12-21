@@ -18,7 +18,7 @@ interface EditModalProps {
 import {
   useGetDetailPrescriptionQuery,
   useEditPrescriptionMutation,
-} from "@/store/medicinereducer";
+} from "@/store/Medicine/medicine.api";
 
 interface EditedDataResponse {
   data: {

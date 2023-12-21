@@ -23,7 +23,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Delete1 from "../Modal/Dashbaord/Delete";
 import Edit from "../Modal/Dashbaord/Edit";
-import { useDeleteAlarmMutation } from "@/store/medicinereducer";
+import { useDeleteAlarmMutation } from "@/store/Medicine/medicine.api";
 
 export default function Card2(props: Alarmdata) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();

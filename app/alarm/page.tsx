@@ -6,7 +6,7 @@ import { StateType } from "@/types";
 import {
   useGetAlarmQuery,
   usePostAlarmMutation,
-} from "@/store/medicinereducer";
+} from "@/store/Medicine/medicine.api";
 
 function Alarm() {
   const [state, setState] = useState<StateType>({

@@ -2,7 +2,7 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import Input1 from "../Input";
 import { Button } from "@nextui-org/button";
-import { usePostBMIMutation } from "@/store/bp";
+import { usePostBMIMutation } from "@/store/BloodPressure/bloodpressure.api";
 import { useSession } from "next-auth/react";
 import { Form, Field } from "react-final-form";
 import styles from "./add.module.css";

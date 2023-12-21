@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getItem } from '@/store/reducer'; 
+import { getItem } from '@/store/reducer.reducer'; 
 import { useSession } from 'next-auth/react';
 // Replace with your action
 

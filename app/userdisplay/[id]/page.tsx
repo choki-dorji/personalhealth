@@ -8,7 +8,7 @@ import {
   Image,
   Button,
 } from "@nextui-org/react";
-import { useGetAlluserQuery } from "@/store/medicinereducer";
+import { useGetAlluserQuery } from "@/store/Medicine/medicine.api";
 
 const link =
   "https://firebasestorage.googleapis.com/v0/b/projectauthbackend.appspot.com/o/images";

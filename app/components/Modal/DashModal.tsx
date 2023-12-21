@@ -10,7 +10,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { Input } from "@nextui-org/input";
-import { usePostAlarmMutation } from "@/store/medicinereducer";
+import { usePostAlarmMutation } from "@/store/Medicine/medicine.api";
 
 function DashModal() {
   const [AlarmPost, { isLoading }] = usePostAlarmMutation();

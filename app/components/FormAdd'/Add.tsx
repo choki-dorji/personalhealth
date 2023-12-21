@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Input1 from "../Input";
 import { Button } from "@nextui-org/react";
-import { usePostBpMutation } from "@/store/bp";
+import { usePostBpMutation } from "@/store/BloodPressure/bloodpressure.api";
 import { useSession } from "next-auth/react";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";

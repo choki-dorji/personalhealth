@@ -3,20 +3,20 @@ import style from "./page.module.css";
 import Card1 from "./components/Cards/Card";
 import ScatterPlot from "./components/chart/chart";
 import Card2 from "./components/Cards/Card2";
-import { useGetAlarmQuery } from "@/store/medicinereducer";
+import { useGetAlarmQuery } from "@/store/Medicine/medicine.api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
-import { useGetBpQuery } from "@/store/bp";
+import { useGetBpQuery } from "@/store/BloodPressure/bloodpressure.api";
 import { formatDateToString } from "@/utils/MonthDate/date";
 
 import DashModal from "./components/Modal/DashModal";
 import React from "react";
 import { Modal, useDisclosure } from "@nextui-org/react";
 import { useSelector } from "react-redux";
-import { useGetBMIQuery } from "@/store/bp";
+import { useGetBMIQuery } from "@/store/BloodPressure/bloodpressure.api";
 import { Loginuserdata } from "@/utils/util";
 import { useDispatch } from "react-redux";
-import { getItem } from "@/store/reducer";
+import { getItem } from "@/store/reducer.reducer";
 import { useSession } from "next-auth/react";
 import { useGetItemOnSessionChange } from "@/utils/islogin";
 

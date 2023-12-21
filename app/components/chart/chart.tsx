@@ -1,7 +1,7 @@
 "use client";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { useGetAllPrescriptionQuery } from "@/store/medicinereducer";
+import { useGetAllPrescriptionQuery } from "@/store/Medicine/medicine.api";
 import React from "react";
 import {
   Chart as ChartJS,

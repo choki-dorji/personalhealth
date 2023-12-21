@@ -8,7 +8,7 @@ import {
   useGetFireDataQuery,
   useEditFireMutation,
   useGetFireDataidQuery,
-} from "@/store/firebase";
+} from "@/store/Fire/fire.api";
 import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/input";
 import { Image } from "@nextui-org/react";

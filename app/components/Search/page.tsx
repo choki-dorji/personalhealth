@@ -3,7 +3,7 @@ import React, { ChangeEvent, useState } from "react";
 import Input1 from "../Input";
 import { Button } from "@nextui-org/button";
 import { useDispatch } from "react-redux";
-import { searchPrescription } from "@/store/search";
+import { searchPrescription } from "@/store/search.reducer";
 import store from "@/store/store";
 
 function Search() {

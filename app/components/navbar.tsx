@@ -3,11 +3,11 @@ import { Navbar as NextUINavbar, NavbarContent } from "@nextui-org/navbar";
 import { useSession } from "next-auth/react";
 import Logo from "./NavbarComponent/Logo";
 import { useDispatch } from "react-redux";
-import { getItem } from "@/store/reducer";
+import { getItem } from "@/store/reducer.reducer";
 import Left from "./NavbarComponent/Left";
 import Right from "./NavbarComponent/Right";
 import { LoginUserProfile } from "@/utils/util";
-import { getAuthData } from "@/store/Authenticated";
+import { getAuthData } from "@/store/Auth/Auth.api";
 import Search from "./NavbarComponent/searchfrom";
 import { useRouter } from "next/navigation";
 
@@ -15,7 +15,7 @@ import {
   useGetFireDataidQuery,
   useEditFireMutation,
   useGetFireDataQuery,
-} from "@/store/firebase";
+} from "@/store/Fire/fire.api";
 
 export const Navbar = () => {
   const router = useRouter();

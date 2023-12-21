@@ -14,7 +14,7 @@ import { EditModalProps, EditedData, editPrescription } from "@/types";
 import {
   useGetDetailPrescriptionQuery,
   useEditPrescriptionMutation,
-} from "@/store/medicinereducer";
+} from "@/store/Medicine/medicine.api";
 
 const ModalEdit: React.FC<EditModalProps> = ({ id, onedit }) => {
   const { data, isLoading } = useGetDetailPrescriptionQuery(id);

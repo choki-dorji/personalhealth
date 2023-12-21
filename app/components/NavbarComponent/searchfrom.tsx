@@ -2,7 +2,7 @@
 import React, { ChangeEvent } from "react";
 import { Input } from "@nextui-org/react";
 import { SearchIcon } from "./SearchIcon";
-import { searchedUser } from "@/store/searchuser";
+import { searchedUser } from "@/store/searchuser.reducer";
 import { useState } from "react";
 import { User } from "@/types";
 import {
@@ -13,8 +13,8 @@ import {
   Divider,
   Image,
 } from "@nextui-org/react";
-import { useGetFireDataQuery } from "@/store/firebase";
-import { useGetAlluserQuery } from "@/store/medicinereducer";
+import { useGetFireDataQuery } from "@/store/Fire/fire.api";
+import { useGetAlluserQuery } from "@/store/Medicine/medicine.api";
 import store from "@/store/store";
 import Link from "next/link";
 
